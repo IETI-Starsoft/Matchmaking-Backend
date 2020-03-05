@@ -2,6 +2,8 @@ package edu.escuelaing.ieti.matchmaking.model;
 
 public class User {
 
+    private String userId;
+
     private String firstName;
 
     private String lastName;
@@ -60,5 +62,13 @@ public class User {
 
     public void setCredits(Integer credits) {
         this.credits = credits;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }
