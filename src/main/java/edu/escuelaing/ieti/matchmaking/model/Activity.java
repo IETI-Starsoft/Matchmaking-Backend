@@ -12,6 +12,7 @@ public abstract class Activity  {
     private String description; 
     private String tipo; 
     private String ubicacion;
+    private String id;
 
     public Date getDate() {
         return date;
@@ -68,6 +69,14 @@ public abstract class Activity  {
     public void setPublicationDate(Date publicationDate) {
         this.publicationDate = publicationDate;
     }
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 
 
