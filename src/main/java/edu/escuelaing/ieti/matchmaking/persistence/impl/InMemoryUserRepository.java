@@ -1,5 +1,6 @@
 package edu.escuelaing.ieti.matchmaking.persistence.impl;
 
+import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
 import edu.escuelaing.ieti.matchmaking.model.User;
 import edu.escuelaing.ieti.matchmaking.persistence.UserRepository;
 import org.springframework.stereotype.Service;
@@ -16,32 +17,39 @@ public class InMemoryUserRepository implements UserRepository {
     private static Map<String, User> userMap = new ConcurrentHashMap<>();
 
     @Override
-    public User create(User user) {
+    public User create(User user) throws MatchmakingException {
+        String userId = user.getUserId();
+        if (userMap.containsKey(userId)) {
+            throw new MatchmakingException("User already in memory");
+        }
+        userMap.put(userId, user);
+        return user;
+    }
+
+    @Override
+    public User update(User user) throws MatchmakingException {
         String userId = user.getUserId();
         if (!userMap.containsKey(userId)){
-            userMap.put(userId, user);
-            return user;
+            throw new MatchmakingException("User not in memory");
         }
-        return null;
+        userMap.put(userId, user);
+        return user;
     }
 
     @Override
-    public User update(User user) {
-        String userId = user.getUserId();
-        if (userMap.containsKey(userId)){
-            userMap.put(userId, user);
-            return user;
+    public User getById(String userId) throws MatchmakingException {
+        User userFound = userMap.get(userId);
+        if (userFound == null){
+            throw new MatchmakingException("User not in memory");
         }
-        return null;
+        return userFound;
     }
 
     @Override
-    public User getById(String userId) {
-        return userMap.get(userId);
-    }
-
-    @Override
-    public void remove(String userId) {
+    public void remove(String userId) throws MatchmakingException {
+        if (!userMap.containsKey(userId)){
+            throw new MatchmakingException("User not in memory");
+        }
         userMap.remove(userId);
     }
 
