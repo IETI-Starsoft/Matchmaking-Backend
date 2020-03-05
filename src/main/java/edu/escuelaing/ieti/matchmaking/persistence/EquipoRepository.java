@@ -5,13 +5,14 @@ import java.util.List;
 import edu.escuelaing.ieti.matchmaking.model.Equipo;
 
 public interface EquipoRepository {
-	Equipo create(Equipo Equipo);
+	
+	Equipo create(Equipo equipo);
 
-    void remove(String Equipo);
+    void remove(String equipo);
 
-    Equipo update(Equipo Equipo);
+    Equipo update(Equipo equipo);
 
-    Equipo getEquipoBynameId(String EquipoNameid);
+    Equipo getEquipoBynameId(String equipoNameid);
 
     List<Equipo> getAll();
 }
