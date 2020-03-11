@@ -71,4 +71,12 @@ public class User {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    public void addCredits(Integer credits) {
+        this.credits += credits;
+    }
+
+    public void subCredits(Integer credits) {
+        this.credits -= credits;
+    }
 }
