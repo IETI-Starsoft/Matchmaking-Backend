@@ -1,6 +1,7 @@
 package edu.escuelaing.ieti.matchmaking.persistence.impl;
 
 import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
+import edu.escuelaing.ieti.matchmaking.exception.UserMatchmakingException;
 import edu.escuelaing.ieti.matchmaking.model.User;
 import edu.escuelaing.ieti.matchmaking.persistence.UserRepository;
 import org.springframework.stereotype.Service;
@@ -17,38 +18,38 @@ public class InMemoryUserRepository implements UserRepository {
     private static Map<String, User> userMap = new ConcurrentHashMap<>();
 
     @Override
-    public User create(User user) throws MatchmakingException {
+    public User create(User user) throws UserMatchmakingException {
         String userId = user.getUserId();
         if (userMap.containsKey(userId)) {
-            throw new MatchmakingException("User already in memory");
+            throw new UserMatchmakingException(UserMatchmakingException.USER_ALREADY_EXISTS);
         }
         userMap.put(userId, user);
         return user;
     }
 
     @Override
-    public User update(User user) throws MatchmakingException {
+    public User update(User user) throws UserMatchmakingException {
         String userId = user.getUserId();
         if (!userMap.containsKey(userId)){
-            throw new MatchmakingException("User not in memory");
+            throw new UserMatchmakingException(UserMatchmakingException.USER_NOT_FOUND);
         }
         userMap.put(userId, user);
         return user;
     }
 
     @Override
-    public User getById(String userId) throws MatchmakingException {
+    public User getById(String userId) throws UserMatchmakingException {
         User userFound = userMap.get(userId);
         if (userFound == null){
-            throw new MatchmakingException("User not in memory");
+            throw new UserMatchmakingException(UserMatchmakingException.USER_NOT_FOUND);
         }
         return userFound;
     }
 
     @Override
-    public void remove(String userId) throws MatchmakingException {
+    public void remove(String userId) throws UserMatchmakingException {
         if (!userMap.containsKey(userId)){
-            throw new MatchmakingException("User not in memory");
+            throw new UserMatchmakingException(UserMatchmakingException.USER_NOT_FOUND);
         }
         userMap.remove(userId);
     }
