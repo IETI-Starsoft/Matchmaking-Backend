@@ -1,6 +1,5 @@
 package edu.escuelaing.ieti.matchmaking.persistence;
 
-import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
 import edu.escuelaing.ieti.matchmaking.exception.UserMatchmakingException;
 import edu.escuelaing.ieti.matchmaking.model.User;
 
