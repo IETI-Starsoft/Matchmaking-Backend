@@ -14,14 +14,14 @@ public class PaymentServiceImpl implements PaymentService {
 
     @Override
     public void rechargeCredits(User user, int amount) throws MatchmakingException {
-        user.setCredits(amount);
+        user.addCredits(amount);
         userRepository.update(user);
 
     }
 
     @Override
     public void bet(User user, int amount) throws MatchmakingException {
-        user.setCredits(amount);
+        user.subCredits(amount);
         userRepository.update(user);
     }
 
