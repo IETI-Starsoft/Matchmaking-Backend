@@ -5,11 +5,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
+import org.springframework.stereotype.Service;
+
 import edu.escuelaing.ieti.matchmaking.model.Equipo;
 import edu.escuelaing.ieti.matchmaking.persistence.EquipoRepository;
 import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 
+@Service
 public class InMemoryEquipoRepository implements EquipoRepository {
 
 	private static Map<String, Equipo> equipoMap = new ConcurrentHashMap<>();

@@ -13,7 +13,7 @@ public interface EquipoService {
 
     Equipo update(Equipo equipo)  throws EntityNotFoundException;
 
-    Equipo getEquipoBynameId(String equipoId)  throws EntityNotFoundException;
+    Equipo getEquipoById(String equipoId)  throws EntityNotFoundException;
 
     List<Equipo> getAll()  throws EntityNotFoundException;
 }
