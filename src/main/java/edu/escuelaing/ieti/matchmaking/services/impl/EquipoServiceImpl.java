@@ -3,6 +3,7 @@ package edu.escuelaing.ieti.matchmaking.services.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
@@ -10,6 +11,7 @@ import edu.escuelaing.ieti.matchmaking.model.Equipo;
 import edu.escuelaing.ieti.matchmaking.persistence.EquipoRepository;
 import edu.escuelaing.ieti.matchmaking.services.EquipoService;
 
+@Service
 public class EquipoServiceImpl implements EquipoService {
 	@Autowired
 	private EquipoRepository inMemoryRepository;
@@ -30,7 +32,7 @@ public class EquipoServiceImpl implements EquipoService {
 	}
 
 	@Override
-	public Equipo getEquipoBynameId(String equipoId) throws EntityNotFoundException {
+	public Equipo getEquipoById(String equipoId) throws EntityNotFoundException {
 		return inMemoryRepository.getEquipoBynameId(equipoId);
 	}
 
