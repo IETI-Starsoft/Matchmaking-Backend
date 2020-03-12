@@ -1,11 +1,16 @@
 package edu.escuelaing.ieti.matchmaking.model;
 
+import com.fasterxml.jackson.annotation.JsonTypeName;
 
+@JsonTypeName("IndividualActivity")
 public class IndividualActivity extends Activity{
 
      
     private User player1;
     private User player2;
+
+
+    public IndividualActivity(){}
 
     public User getPlayer1() {
         return player1;

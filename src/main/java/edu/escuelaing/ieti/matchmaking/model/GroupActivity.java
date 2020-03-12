@@ -1,11 +1,17 @@
 package edu.escuelaing.ieti.matchmaking.model;
 
+import java.sql.Date;
 
-public class GroupActivity extends Activity{
+import com.fasterxml.jackson.annotation.JsonTypeName;
+
+@JsonTypeName("GroupActivity")
+public class GroupActivity extends Activity {
 
      
     private Team team1;
     private Team team2;
+
+    public GroupActivity(){}
 
     public Team getTeam1() {
         return team1;

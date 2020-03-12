@@ -2,9 +2,19 @@ package edu.escuelaing.ieti.matchmaking.model;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "typ")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = GroupActivity.class, name = "GroupActivity"),
+        @JsonSubTypes.Type(value = IndividualActivity.class, name = "IndividualActivity")})
 public abstract class Activity  {
 
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     private Date date;
+    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     private Date publicationDate;  
     private int bet; 
     private String description; 
@@ -12,6 +22,9 @@ public abstract class Activity  {
     private String location;
     private String id;
 
+
+    public Activity(){}
+    
     public Date getDate() {
         return date;
     }
