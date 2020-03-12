@@ -1,6 +1,7 @@
 package edu.escuelaing.ieti.matchmaking.persistence.impl;
 
-import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
+import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
+import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.Activity;
 import edu.escuelaing.ieti.matchmaking.persistence.ActivityRepository;
 import org.springframework.stereotype.Service;
@@ -17,38 +18,38 @@ public class InMemoryActivityRepository implements ActivityRepository {
     private static Map<String, Activity> activityMap = new ConcurrentHashMap<>();
 
     @Override
-    public Activity create(Activity activity) throws MatchmakingException {
+    public Activity create(Activity activity) throws EntityExistsException {
         String activityId = activity.getId();
         if (activityMap.containsKey(activityId)) {
-            throw new MatchmakingException(MatchmakingException.ActivityAlreadyExist);
+            throw new EntityExistsException(Activity.class, "Activity", activity.toString());
         }
         activityMap.put(activityId, activity);
         return activity;
     }
 
     @Override
-    public Activity update(Activity activity) throws MatchmakingException {
+    public Activity update(Activity activity) throws EntityNotFoundException {
         String activityId = activity.getId();
         if (!activityMap.containsKey(activityId)){
-            throw new MatchmakingException(MatchmakingException.ActivityNotFound);
+            throw new EntityNotFoundException(Activity.class, "Activity", activity.toString());
         }
         activityMap.put(activityId, activity);
         return activity;
     }
 
     @Override
-    public Activity getById(String activityId) throws MatchmakingException {
+    public Activity getById(String activityId) throws EntityNotFoundException {
         Activity activityFound = activityMap.get(activityId);
         if (activityFound == null){
-            throw new MatchmakingException(MatchmakingException.ActivityNotFound);
+			throw new EntityNotFoundException(Activity.class, "id Activity", activityId);
         }
         return activityFound;
     }
 
     @Override
-    public void remove(String activityId) throws MatchmakingException {
+    public void remove(String activityId) throws EntityNotFoundException {
         if (!activityMap.containsKey(activityId)){
-            throw new MatchmakingException(MatchmakingException.ActivityNotFound);
+			throw new EntityNotFoundException(Activity.class, "id Activity", activityId);
         }
         activityMap.remove(activityId);
     }

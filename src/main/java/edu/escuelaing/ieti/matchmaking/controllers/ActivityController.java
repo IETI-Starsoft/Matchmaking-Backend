@@ -1,5 +1,7 @@
 package edu.escuelaing.ieti.matchmaking.controllers;
-import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
+
+import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
+import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.Activity;
 import edu.escuelaing.ieti.matchmaking.services.ActivityService;
 import java.util.List;
@@ -25,20 +27,20 @@ public class ActivityController {
 	        }
 	    }
 	    @PostMapping
-	    public ResponseEntity<?> createActivity(@RequestBody Activity activity) throws MatchmakingException {
+	    public ResponseEntity<?> createActivity(@RequestBody Activity activity) throws EntityExistsException {
 	        return new ResponseEntity<>(activityService.create(activity), HttpStatus.CREATED);
 	    }
 	    @GetMapping("/{activityId}")
-	    public ResponseEntity<?> getActivityById(@PathVariable String activityId) throws MatchmakingException {
+	    public ResponseEntity<?> getActivityById(@PathVariable String activityId) throws EntityNotFoundException {
 	        return new ResponseEntity<>(activityService.getActivityById(activityId), HttpStatus.OK);
 	    }
 	    @PutMapping
-	    public ResponseEntity<?> updateActivity(@RequestBody Activity activity) throws MatchmakingException {
+	    public ResponseEntity<?> updateActivity(@RequestBody Activity activity) throws EntityNotFoundException {
 	        return new ResponseEntity<>(activityService.update(activity), HttpStatus.OK);
 	    }
 
 	    @DeleteMapping("/{activityId}")
-	    public ResponseEntity<?> removeActivity(@PathVariable String activityId) throws MatchmakingException {
+	    public ResponseEntity<?> removeActivity(@PathVariable String activityId) throws EntityNotFoundException {
 	    	activityService.remove(activityId);
 	        return new ResponseEntity<>(HttpStatus.OK);
 	    }
