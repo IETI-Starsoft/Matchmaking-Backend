@@ -26,14 +26,14 @@ public class Team {
 		this.members = members;
 	}
 	
-	public void setNombreid(String equipoId) {
-		this.teamId = equipoId;
+	public void setNombreid(String teamId) {
+		this.teamId = teamId;
 	}
 	public String toString() {
-        return "Equipo{" +
-                "EquipoId='" + teamId + '\'' +
-                ", capitan='" + captain.toString() + '\'' +
-                ", integrantes='" + members.toString() + '\'' +
+        return "Team{" +
+                "teamId='" + teamId + '\'' +
+                ", captain='" + captain.toString() + '\'' +
+                ", members='" + members.toString() + '\'' +
                 '}';
 	}
 }

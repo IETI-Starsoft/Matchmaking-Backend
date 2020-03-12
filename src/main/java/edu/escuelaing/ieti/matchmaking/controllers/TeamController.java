@@ -18,7 +18,7 @@ public class TeamController {
 	@Autowired
     private TeamService teamService;
 	 @GetMapping
-	  public ResponseEntity<?> getAllEquipos() {
+	  public ResponseEntity<?> getAllTeams() {
 	        List<Team> teams = null;
 	        try {
 	        	teams = teamService.getAll();
@@ -29,7 +29,7 @@ public class TeamController {
 	        }
 	    }
 	    @PostMapping
-	    public ResponseEntity<?> createEquipo(@RequestBody Team team) throws EntityExistsException {
+	    public ResponseEntity<?> createTeam(@RequestBody Team team) throws EntityExistsException {
 	        return new ResponseEntity<>(teamService.create(team), HttpStatus.CREATED);
 	    }
 	    @GetMapping("/{teamId}")
@@ -37,12 +37,12 @@ public class TeamController {
 	        return new ResponseEntity<>(teamService.getTeamById(teamId), HttpStatus.OK);
 	    }
 	    @PutMapping
-	    public ResponseEntity<?> updateUser(@RequestBody Team team) throws EntityNotFoundException {
+	    public ResponseEntity<?> updateTeam(@RequestBody Team team) throws EntityNotFoundException {
 	        return new ResponseEntity<>(teamService.update(team), HttpStatus.OK);
 	    }
 
 	    @DeleteMapping("/{teamId}")
-	    public ResponseEntity<?> removeUser(@PathVariable String teamId) throws EntityNotFoundException {
+	    public ResponseEntity<?> removeTeam(@PathVariable String teamId) throws EntityNotFoundException {
 	    	teamService.remove(teamId);
 	        return new ResponseEntity<>(HttpStatus.OK);
 	    }
