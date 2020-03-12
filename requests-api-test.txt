@@ -1,0 +1,11 @@
+GET all users
+curl http://localhost:8080/api/users
+
+POST user
+curl -H "Content-Type: application/json" -X POST -d '{"userId":"1", "firstName":"user1", "lastName":"post", "email":"user1@mail.com", "password":"encrypt-this", "rating":4, "credits":100 }' http://localhost:8080/api/users
+
+DELETE user
+curl -X DELETE http://localhost:8080/api/users/{userId}
+
+PUT user
+curl -H "Content-Type: application/json" -X PUT -d '{"userId":"1", "firstName":"user1", "lastName":"put", "email":"user1@mail.com", "password":"encrypt-this", "rating":4, "credits":100 }' http://localhost:8080/api/users

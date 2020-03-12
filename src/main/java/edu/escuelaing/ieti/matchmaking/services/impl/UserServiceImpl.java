@@ -1,6 +1,7 @@
 package edu.escuelaing.ieti.matchmaking.services.impl;
 
 import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
+import edu.escuelaing.ieti.matchmaking.exception.UserMatchmakingException;
 import edu.escuelaing.ieti.matchmaking.model.User;
 import edu.escuelaing.ieti.matchmaking.persistence.UserRepository;
 import edu.escuelaing.ieti.matchmaking.services.UserService;
@@ -16,22 +17,22 @@ public class UserServiceImpl implements UserService {
     private UserRepository inMemoryRepository;
 
     @Override
-    public User create(User user) throws MatchmakingException {
+    public User create(User user) throws UserMatchmakingException {
         return inMemoryRepository.create(user);
     }
 
     @Override
-    public void remove(String userId) throws MatchmakingException {
+    public void remove(String userId) throws UserMatchmakingException {
         inMemoryRepository.remove(userId);
     }
 
     @Override
-    public User update(User user) throws MatchmakingException {
+    public User update(User user) throws UserMatchmakingException {
         return inMemoryRepository.update(user);
     }
 
     @Override
-    public User getUserById(String userId) throws MatchmakingException {
+    public User getUserById(String userId) throws UserMatchmakingException {
         return inMemoryRepository.getById(userId);
     }
 
