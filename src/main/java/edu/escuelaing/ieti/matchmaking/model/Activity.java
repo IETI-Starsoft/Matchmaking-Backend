@@ -1,17 +1,15 @@
 package edu.escuelaing.ieti.matchmaking.model;
 
 import java.sql.Date;
-import java.sql.Time;
 
 public abstract class Activity  {
 
     private Date date;
     private Date publicationDate;  
-    private Time time;     
     private int bet; 
     private String description; 
-    private String tipo; 
-    private String ubicacion;
+    private String type; 
+    private String location;
     private String id;
 
     public Date getDate() {
@@ -20,14 +18,6 @@ public abstract class Activity  {
 
     public void setDate(Date date) {
         this.date = date;
-    }
-
-    public Time getTime() {
-        return time;
-    }
-
-    public void setTime(Time time) {
-        this.time = time;
     }
 
     public int getBet() {
@@ -46,20 +36,12 @@ public abstract class Activity  {
         this.description = description;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getType() {
+        return type;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
-    }
-
-    public String getUbicacion() {
-        return ubicacion;
-    }
-
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Date getPublicationDate() {
@@ -77,6 +59,14 @@ public abstract class Activity  {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
 
 
