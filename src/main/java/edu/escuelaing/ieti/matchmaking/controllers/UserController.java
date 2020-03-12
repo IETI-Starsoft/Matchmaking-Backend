@@ -1,6 +1,7 @@
 package edu.escuelaing.ieti.matchmaking.controllers;
 
-import edu.escuelaing.ieti.matchmaking.exception.UserMatchmakingException;
+import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
+import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.User;
 import edu.escuelaing.ieti.matchmaking.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,14 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-
-    private static Logger logger = Logger.getLogger(UserController.class.getName());
 
     @Autowired
     private UserService userService;
@@ -29,59 +26,29 @@ public class UserController {
             return new ResponseEntity<>(users, HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
-            logger.log(Level.SEVERE, null, e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<?> getUserById(@PathVariable String userId) {
-        User user = null;
-        try {
-            user = userService.getUserById(userId);
-            return new ResponseEntity<>(user, HttpStatus.OK);
-        } catch (UserMatchmakingException e) {
-            e.printStackTrace();
-            logger.log(Level.INFO, e.getMessage(), e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<?> getUserById(@PathVariable String userId) throws EntityNotFoundException {
+        return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody User user) {
-        User createdUser = null;
-        try {
-            createdUser = userService.create(user);
-            return new ResponseEntity<>(createdUser,HttpStatus.CREATED);
-        } catch (UserMatchmakingException e) {
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.CONFLICT);
-        }
+    public ResponseEntity<?> createUser(@RequestBody User user) throws EntityExistsException {
+        return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
     }
 
     @PutMapping
-    public ResponseEntity<?> updateUser(@RequestBody User user) {
-        User updatedUser = null;
-        try {
-            updatedUser = userService.update(user);
-            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
-        } catch (UserMatchmakingException e) {
-            e.printStackTrace();
-            logger.log(Level.INFO, e.getMessage(), e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<?> updateUser(@RequestBody User user) throws EntityNotFoundException {
+        return new ResponseEntity<>(userService.update(user), HttpStatus.OK);
     }
 
     @DeleteMapping("/{userId}")
-    public ResponseEntity<?> removeUser(@PathVariable String userId) {
-        try {
-            userService.remove(userId);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } catch (UserMatchmakingException e) {
-            e.printStackTrace();
-            logger.log(Level.INFO, e.getMessage(), e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<?> removeUser(@PathVariable String userId) throws EntityNotFoundException {
+        userService.remove(userId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
