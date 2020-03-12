@@ -2,16 +2,18 @@ package edu.escuelaing.ieti.matchmaking.services;
 
 import java.util.List;
 
-import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
+import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
+import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.Equipo;
 public interface EquipoService {
-	Equipo create(Equipo Equipo)  throws MatchmakingException;
+	
+	Equipo create(Equipo equipo)  throws EntityExistsException;
 
-    void remove(String Equipo)  throws MatchmakingException;
+    void remove(String equipo)  throws EntityNotFoundException;
 
-    Equipo update(Equipo Equipo)  throws MatchmakingException;
+    Equipo update(Equipo equipo)  throws EntityNotFoundException;
 
-    Equipo getEquipoBynameId(String EquipoNameid)  throws MatchmakingException;
+    Equipo getEquipoBynameId(String equipoId)  throws EntityNotFoundException;
 
-    List<Equipo> getAll()  throws MatchmakingException;
+    List<Equipo> getAll()  throws EntityNotFoundException;
 }

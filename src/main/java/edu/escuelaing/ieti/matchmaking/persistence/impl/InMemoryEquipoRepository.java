@@ -7,59 +7,60 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import edu.escuelaing.ieti.matchmaking.model.Equipo;
 import edu.escuelaing.ieti.matchmaking.persistence.EquipoRepository;
-import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
+import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
+import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
+
 public class InMemoryEquipoRepository implements EquipoRepository {
-	
-	private static Map<String, Equipo> EquipoMap = new ConcurrentHashMap<>();
+
+	private static Map<String, Equipo> equipoMap = new ConcurrentHashMap<>();
 
 	@Override
-	public Equipo create(Equipo equipo)  throws MatchmakingException {
-		String nombreId=equipo.getNombreid();
-		if(!EquipoMap.containsKey(nombreId)) {
-			EquipoMap.put(nombreId, equipo);
+	public Equipo create(Equipo equipo) throws EntityExistsException {
+		String equipoId = equipo.getEquipoId();
+		if (!equipoMap.containsKey(equipoId)) {
+			equipoMap.put(equipoId, equipo);
 			return equipo;
 		}
-		throw new MatchmakingException("Team already in memory");
+		throw new EntityExistsException(Equipo.class, "Equipo", equipo.toString());
 	}
 
 	@Override
-	public void remove(String nombreId) throws MatchmakingException  {
-		if(EquipoMap.containsKey(nombreId)) {
-			EquipoMap.remove(nombreId);
-		}else{
-			throw new MatchmakingException("Team to remove not found");
+	public void remove(String equipoId) throws EntityNotFoundException {
+		if (equipoMap.containsKey(equipoId)) {
+			equipoMap.remove(equipoId);
+		} else {
+			throw new EntityNotFoundException(Equipo.class, "id Equipo", equipoId);
 		}
-		
+
 	}
 
 	@Override
-	public Equipo update(Equipo equipo) throws MatchmakingException {
-		String nombreId=equipo.getNombreid();
-		if(EquipoMap.containsKey(nombreId)) {
-			EquipoMap.put(nombreId, equipo);
+	public Equipo update(Equipo equipo) throws EntityNotFoundException {
+		String equipoId = equipo.getEquipoId();
+		if (equipoMap.containsKey(equipoId)) {
+			equipoMap.put(equipoId, equipo);
 			return equipo;
 		}
-		 throw new MatchmakingException("Team to update not found");
+		throw new EntityNotFoundException(Equipo.class, "Equipo", equipo.toString());
 	}
 
 	@Override
-	public Equipo getEquipoBynameId(String EquipoNameid) throws MatchmakingException  {
-		try {
-			return EquipoMap.get(EquipoNameid);	
-		} catch (Exception e) {
-			throw new MatchmakingException("Team to get not found");
+	public Equipo getEquipoBynameId(String equipoId) throws EntityNotFoundException {
+		if (equipoMap.get(equipoId) == null) {
+			throw new EntityNotFoundException(Equipo.class, "Id Equipo", equipoId);
+		} else {
+			return equipoMap.get(equipoId);
 		}
-		
 	}
 
 	@Override
-	public List<Equipo> getAll()  {
-		Set<Map.Entry<String, Equipo>> entrySet = EquipoMap.entrySet();
-        List<Equipo> equipos = new ArrayList<>();
-        for (Map.Entry<String, Equipo> entry : entrySet) {
-        	equipos.add(entry.getValue());
-        }
-        return equipos;
+	public List<Equipo> getAll() throws EntityNotFoundException {
+		Set<Map.Entry<String, Equipo>> entrySet = equipoMap.entrySet();
+		List<Equipo> equipos = new ArrayList<>();
+		for (Map.Entry<String, Equipo> entry : entrySet) {
+			equipos.add(entry.getValue());
+		}
+		return equipos;
 	}
 
 }
