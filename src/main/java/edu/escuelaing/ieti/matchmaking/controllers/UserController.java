@@ -52,7 +52,7 @@ public class UserController {
         User createdUser = null;
         try {
             createdUser = userService.create(user);
-            return new ResponseEntity<>(user,HttpStatus.CREATED);
+            return new ResponseEntity<>(createdUser,HttpStatus.CREATED);
         } catch (UserMatchmakingException e) {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.CONFLICT);
@@ -64,7 +64,7 @@ public class UserController {
         User updatedUser = null;
         try {
             updatedUser = userService.update(user);
-            return new ResponseEntity<>(user, HttpStatus.OK);
+            return new ResponseEntity<>(updatedUser, HttpStatus.OK);
         } catch (UserMatchmakingException e) {
             e.printStackTrace();
             logger.log(Level.INFO, e.getMessage(), e);
