@@ -1,5 +1,6 @@
 package edu.escuelaing.ieti.matchmaking.services.impl;
 
+import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
@@ -13,14 +14,14 @@ public class PaymentServiceImpl implements PaymentService {
     UserRepository userRepository;
 
     @Override
-    public void rechargeCredits(User user, int amount) throws MatchmakingException {
+    public void rechargeCredits(User user, int amount) throws MatchmakingException, EntityNotFoundException {
         user.addCredits(amount);
         userRepository.update(user);
 
     }
 
     @Override
-    public void bet(User user, int amount) throws MatchmakingException {
+    public void bet(User user, int amount) throws MatchmakingException, EntityNotFoundException {
         user.subCredits(amount);
         userRepository.update(user);
     }

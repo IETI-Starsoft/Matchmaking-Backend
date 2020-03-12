@@ -79,4 +79,16 @@ public class User {
     public void subCredits(Integer credits) {
         this.credits -= credits;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId='" + userId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", rating=" + rating +
+                ", credits=" + credits +
+                '}';
+    }
 }
