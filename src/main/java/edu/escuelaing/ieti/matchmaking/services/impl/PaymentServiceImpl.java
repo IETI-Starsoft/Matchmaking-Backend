@@ -1,6 +1,8 @@
 package edu.escuelaing.ieti.matchmaking.services.impl;
 
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
+import edu.escuelaing.ieti.matchmaking.exception.InsufficientFundsException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
@@ -21,7 +23,8 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public void bet(User user, int amount) throws MatchmakingException, EntityNotFoundException {
+    public void bet(User user, int amount)
+            throws MatchmakingException, EntityNotFoundException, InsufficientFundsException {
         user.subCredits(amount);
         userRepository.update(user);
     }
