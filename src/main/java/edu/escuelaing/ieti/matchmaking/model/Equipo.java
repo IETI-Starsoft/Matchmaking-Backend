@@ -8,7 +8,7 @@ public class Equipo {
 	
 	private User capitan; 
 	
-	private String nombreid; 
+	private String equipoId; 
 	
 	private Date fechaCreacion;
 	
@@ -24,8 +24,8 @@ public class Equipo {
 		return integrantes;
 	}
 	
-	public String getNombreid() {
-		return nombreid;
+	public String getEquipoId() {
+		return equipoId;
 	}
 	
 	public void setCapitan(User capitan) {
@@ -40,7 +40,7 @@ public class Equipo {
 		this.integrantes = integrantes;
 	}
 	
-	public void setNombreid(String nombreid) {
-		this.nombreid = nombreid;
+	public void setNombreid(String equipoId) {
+		this.equipoId = equipoId;
 	}
 }

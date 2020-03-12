@@ -4,38 +4,39 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
+import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
+import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.Equipo;
 import edu.escuelaing.ieti.matchmaking.persistence.EquipoRepository;
 import edu.escuelaing.ieti.matchmaking.services.EquipoService;
 
 public class EquipoServiceImpl implements EquipoService {
 	@Autowired
-    private EquipoRepository inMemoryRepository;
+	private EquipoRepository inMemoryRepository;
 
 	@Override
-	public Equipo create(Equipo Equipo) throws MatchmakingException {
-		return inMemoryRepository.create(Equipo);
+	public Equipo create(Equipo equipo) throws EntityExistsException {
+		return inMemoryRepository.create(equipo);
 	}
 
 	@Override
-	public void remove(String EquipoNameid) throws MatchmakingException {
-		inMemoryRepository.remove(EquipoNameid);
+	public void remove(String equipoId) throws EntityNotFoundException {
+		inMemoryRepository.remove(equipoId);
 	}
 
 	@Override
-	public Equipo update(Equipo Equipo)  throws MatchmakingException{
-		return inMemoryRepository.update(Equipo);
+	public Equipo update(Equipo equipo) throws EntityNotFoundException {
+		return inMemoryRepository.update(equipo);
 	}
 
 	@Override
-	public Equipo getEquipoBynameId(String EquipoNameid)  throws MatchmakingException{
-		return inMemoryRepository.getEquipoBynameId(EquipoNameid);
+	public Equipo getEquipoBynameId(String equipoId) throws EntityNotFoundException {
+		return inMemoryRepository.getEquipoBynameId(equipoId);
 	}
 
 	@Override
-	public List<Equipo> getAll() throws MatchmakingException {
-		return  inMemoryRepository.getAll();
+	public List<Equipo> getAll() throws EntityNotFoundException {
+		return inMemoryRepository.getAll();
 	}
 
 }
