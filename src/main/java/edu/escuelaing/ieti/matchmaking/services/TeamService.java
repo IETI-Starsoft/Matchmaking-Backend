@@ -9,7 +9,7 @@ public interface TeamService {
 	
 	Team create(Team team)  throws EntityExistsException;
 
-    void remove(String teamId)  throws EntityNotFoundException;
+    void remove(Team team)  throws EntityNotFoundException;
 
     Team update(Team team)  throws EntityNotFoundException;
 
