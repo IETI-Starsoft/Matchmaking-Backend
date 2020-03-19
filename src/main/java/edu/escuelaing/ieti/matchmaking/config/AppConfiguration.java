@@ -1,4 +1,4 @@
-package edu.escuelaing.ieti.matchmaking;
+package edu.escuelaing.ieti.matchmaking.config;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;

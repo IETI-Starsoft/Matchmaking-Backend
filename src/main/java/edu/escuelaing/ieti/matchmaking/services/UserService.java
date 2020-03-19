@@ -10,7 +10,7 @@ public interface UserService {
 
     User create(User user) throws EntityExistsException;
 
-    void remove(String userId) throws EntityNotFoundException;
+    void remove(User user) throws EntityNotFoundException;
 
     User update(User user) throws EntityNotFoundException;
 

@@ -1,21 +1,13 @@
 package edu.escuelaing.ieti.matchmaking.persistence;
 
-import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
-import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.User;
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 
-public interface UserRepository {
+@Repository
+public interface UserRepository extends MongoRepository<User, String> {
 
-    User create(User user) throws EntityExistsException;
-
-    User update(User user) throws EntityNotFoundException;
-
-    User getById(String userId) throws EntityNotFoundException;
-
-    void remove(String userId) throws EntityNotFoundException;
-
-    List<User> getAll();
+    boolean existsByEmail(String email);
 
 }

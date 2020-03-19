@@ -45,9 +45,9 @@ public class UserController {
         return new ResponseEntity<>(userService.update(user), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{userId}")
-    public ResponseEntity<?> removeUser(@PathVariable String userId) throws EntityNotFoundException {
-        userService.remove(userId);
+    @DeleteMapping
+    public ResponseEntity<?> removeUser(@RequestBody User user) throws EntityNotFoundException {
+        userService.remove(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
