@@ -7,7 +7,7 @@ public class Team {
 	private ArrayList <User> members;
 	
 	private User captain; 
-	
+	private Integer credits;
 	private String teamId; 
 	
 	public User getCapitan() {
@@ -28,6 +28,13 @@ public class Team {
 	
 	public void setNombreid(String teamId) {
 		this.teamId = teamId;
+	}
+	public void addCredits(Integer credits) {
+		this.credits += credits;
+	}
+
+	public void subCredits(Integer credits) {
+		this.credits -= credits;
 	}
 	public String toString() {
         return "Team{" +
