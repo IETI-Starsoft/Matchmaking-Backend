@@ -9,35 +9,49 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository inMemoryRepository;
+    private UserRepository userRepository;
 
     @Override
     public User create(User user) throws EntityExistsException {
-        return inMemoryRepository.create(user);
+        if (userRepository.existsByEmail(user.getEmail())){
+            throw new EntityExistsException(User.class, "User email", user.getEmail());
+        }
+        return userRepository.save(user);
     }
 
     @Override
-    public void remove(String userId) throws EntityNotFoundException {
-        inMemoryRepository.remove(userId);
+    public void remove(User user) throws EntityNotFoundException {
+        if (!userRepository.existsByEmail(user.getEmail())){
+            throw new EntityNotFoundException(User.class, "User email", user.getEmail());
+        }
+        userRepository.delete(user);
     }
 
     @Override
     public User update(User user) throws EntityNotFoundException {
-        return inMemoryRepository.update(user);
+        if (!userRepository.existsByEmail(user.getEmail())){
+            throw new EntityNotFoundException(User.class, "User email", user.getEmail());
+        }
+        return userRepository.save(user);
     }
 
     @Override
     public User getUserById(String userId) throws EntityNotFoundException {
-        return inMemoryRepository.getById(userId);
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if (!optionalUser.isPresent()){
+            throw new EntityNotFoundException(User.class, "User id", userId);
+        }
+        return optionalUser.get();
     }
 
     @Override
     public List<User> getAll() {
-        return inMemoryRepository.getAll();
+        return userRepository.findAll();
     }
 }

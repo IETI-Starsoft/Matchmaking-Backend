@@ -18,7 +18,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public void rechargeCredits(User user, int amount) throws MatchmakingException, EntityNotFoundException {
         user.addCredits(amount);
-        userRepository.update(user);
+        //userRepository.update(user);
 
     }
 
@@ -26,7 +26,7 @@ public class PaymentServiceImpl implements PaymentService {
     public void bet(User user, int amount)
             throws MatchmakingException, EntityNotFoundException, InsufficientFundsException {
         user.subCredits(amount);
-        userRepository.update(user);
+        //userRepository.update(user);
     }
 
 }
