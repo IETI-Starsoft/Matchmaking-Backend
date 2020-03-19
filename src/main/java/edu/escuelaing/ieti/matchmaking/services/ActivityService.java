@@ -10,7 +10,7 @@ public interface ActivityService {
 
 	Activity create(Activity activity) throws EntityExistsException;
 
-    void remove(String activityId) throws EntityNotFoundException;
+    void remove(Activity activity) throws EntityNotFoundException;
 
     Activity update(Activity activity) throws EntityNotFoundException;
 

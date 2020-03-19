@@ -2,6 +2,9 @@ package edu.escuelaing.ieti.matchmaking.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 @JsonTypeName("IndividualActivity")
 public class IndividualActivity extends Activity{
 

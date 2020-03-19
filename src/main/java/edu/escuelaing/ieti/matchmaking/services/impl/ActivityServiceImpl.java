@@ -7,6 +7,7 @@ import edu.escuelaing.ieti.matchmaking.services.ActivityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import edu.escuelaing.ieti.matchmaking.model.Activity;
+import java.util.Optional;
 
 import java.util.List;
 
@@ -14,30 +15,43 @@ import java.util.List;
 public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
-    private ActivityRepository inMemoryRepository;
+    private ActivityRepository activityRepository;
 
     @Override
     public Activity create(Activity activity) throws EntityExistsException {
-        return inMemoryRepository.create(activity);
+        if (activityRepository.existsById(activity.getId())){
+            throw new EntityExistsException(Activity.class, "Activity id", activity.getId());
+        }
+        return activityRepository.save(activity);
     }
 
     @Override
-    public void remove(String activityId) throws EntityNotFoundException {
-        inMemoryRepository.remove(activityId);
+    public void remove(Activity activity) throws EntityNotFoundException {
+        if (!activityRepository.existsById(activity.getId())){
+            throw new EntityNotFoundException(Activity.class,"Activity id", activity.getId());
+        }
+        activityRepository.delete(activity);
     }
 
     @Override
     public Activity update(Activity activity) throws EntityNotFoundException {
-        return inMemoryRepository.update(activity);
+        if (!activityRepository.existsById(activity.getId())){
+            throw new EntityNotFoundException(Activity.class,"Activity id", activity.getId());
+        }
+        return activityRepository.save(activity);
     }
 
     @Override
     public Activity getActivityById(String activityId) throws EntityNotFoundException {
-        return inMemoryRepository.getById(activityId);
+        Optional<Activity> optionalActivity = activityRepository.findById(activityId);
+        if (!optionalActivity.isPresent()){
+            throw new EntityNotFoundException(Activity.class, "Activity id", activityId);
+        }
+        return optionalActivity.get();
     }
 
     @Override
     public List<Activity> getAll() {
-        return inMemoryRepository.getAll();
+        return activityRepository.findAll();
     }
 }

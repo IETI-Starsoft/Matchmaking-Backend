@@ -5,17 +5,22 @@ import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.Activity;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface ActivityRepository {
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
-    Activity create(Activity activity) throws EntityExistsException;
+@Repository
+public interface ActivityRepository extends MongoRepository<Activity, String> {
 
-    Activity update(Activity activity) throws EntityNotFoundException;
+    Activity save(Activity activity);
 
-    Activity getById(String activityId) throws EntityNotFoundException;
+    Optional<Activity> findById(String activityId);
 
-    void remove(String activityId) throws EntityNotFoundException;
+    void delete(Activity activity);
 
-    List<Activity> getAll();
+    List<Activity> findAll();
+
+    boolean existsById(String id); 
 
 }

@@ -1,10 +1,12 @@
 package edu.escuelaing.ieti.matchmaking.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import org.springframework.data.annotation.Id;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "typ")
 @JsonSubTypes({
@@ -12,6 +14,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = IndividualActivity.class, name = "IndividualActivity")})
 public abstract class Activity  {
 
+    @Id
+    private String id;
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
     private Date date;
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
@@ -20,7 +24,7 @@ public abstract class Activity  {
     private String description; 
     private String type; 
     private String location;
-    private String id;
+    
 
 
     public Activity(){}
