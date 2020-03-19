@@ -51,6 +51,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByEmail(String email) throws EntityNotFoundException {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (!optionalUser.isPresent()){
+            throw new EntityNotFoundException(User.class, "User email", email);
+        }
+        return optionalUser.get();
+    }
+
+    @Override
     public List<User> getAll() {
         return userRepository.findAll();
     }

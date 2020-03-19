@@ -16,5 +16,7 @@ public interface UserService {
 
     User getUserById(String userId) throws EntityNotFoundException;
 
+    User getUserByEmail(String email) throws EntityNotFoundException;
+
     List<User> getAll();
 }
