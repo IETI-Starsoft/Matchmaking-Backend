@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
 import edu.escuelaing.ieti.matchmaking.model.User;
+import edu.escuelaing.ieti.matchmaking.persistence.ActivityRepository;
+import edu.escuelaing.ieti.matchmaking.persistence.TeamRepository;
 import edu.escuelaing.ieti.matchmaking.persistence.UserRepository;
 import edu.escuelaing.ieti.matchmaking.services.PaymentService;
 
@@ -15,18 +17,48 @@ public class PaymentServiceImpl implements PaymentService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    TeamRepository teamRepository;
+
+    @Autowired
+    ActivityRepository activityRepository;
+
     @Override
-    public void rechargeCredits(User user, int amount) throws MatchmakingException, EntityNotFoundException {
-        user.addCredits(amount);
-        //userRepository.update(user);
+    public void rechargeCredits(String userID, int amount) throws MatchmakingException, EntityNotFoundException {
+        // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void bet(User user, int amount)
-            throws MatchmakingException, EntityNotFoundException, InsufficientFundsException {
-        user.subCredits(amount);
-        //userRepository.update(user);
+    public void addCreditsUserToUser(String userID1, String userID2, int amount) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addCreditsUserToTeam(String userID, String teamID, int amount) throws EntityNotFoundException {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void addCreditsTeamToUser(String teamID, String userID, int amount)
+            throws InsufficientFundsException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void betUserToActivity(String userID, String activityID, int amount) throws EntityNotFoundException {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void betTeamToActivity(String teamID, String activityID, int amount)
+            throws InsufficientFundsException, EntityNotFoundException {
+        // TODO Auto-generated method stub
+
     }
 
 }
