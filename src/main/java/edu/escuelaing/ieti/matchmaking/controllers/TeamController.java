@@ -18,15 +18,11 @@ public class TeamController {
 	@Autowired
     private TeamService teamService;
 	 @GetMapping
-	  public ResponseEntity<?> getAllTeams() {
+	  public ResponseEntity<?> getAllTeams() throws EntityNotFoundException {
 	        List<Team> teams = null;
-	        try {
 	        	teams = teamService.getAll();
 	            return new ResponseEntity<>(teams, HttpStatus.OK);
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	        }
+	       
 	    }
 	    @PostMapping
 	    public ResponseEntity<?> createTeam(@RequestBody Team team) throws EntityExistsException {
@@ -41,9 +37,9 @@ public class TeamController {
 	        return new ResponseEntity<>(teamService.update(team), HttpStatus.OK);
 	    }
 
-	    @DeleteMapping("/{teamId}")
-	    public ResponseEntity<?> removeTeam(@PathVariable String teamId) throws EntityNotFoundException {
-	    	teamService.remove(teamId);
+	    @DeleteMapping
+	    public ResponseEntity<?> removeTeam(@PathVariable Team team) throws EntityNotFoundException {
+	    	teamService.remove(team);
 	        return new ResponseEntity<>(HttpStatus.OK);
 	    }
 }

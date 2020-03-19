@@ -1,6 +1,7 @@
 package edu.escuelaing.ieti.matchmaking.services.impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,31 +15,44 @@ import edu.escuelaing.ieti.matchmaking.services.TeamService;
 @Service
 public class TeamServiceImpl implements TeamService {
 	@Autowired
-	private TeamRepository inMemoryRepository;
+	private TeamRepository teamRepository;
 
 	@Override
 	public Team create(Team team) throws EntityExistsException {
-		return inMemoryRepository.create(team);
+		if (teamRepository.existsById(team.getTeamId())){
+            throw new EntityExistsException(Team.class, "Team Id", team.getTeamId());
+        }
+        return teamRepository.save(team);
 	}
 
 	@Override
-	public void remove(String teamId) throws EntityNotFoundException {
-		inMemoryRepository.remove(teamId);
+	public void remove(Team team) throws EntityNotFoundException {
+		if (teamRepository.existsById(team.getTeamId())){
+            throw new EntityNotFoundException(Team.class, "Team Id", team.getTeamId());
+        }
+		teamRepository.delete(team);
 	}
 
 	@Override
 	public Team update(Team team) throws EntityNotFoundException {
-		return inMemoryRepository.update(team);
+		if (teamRepository.existsById(team.getTeamId())){
+            throw new EntityNotFoundException(Team.class, "Team Id", team.getTeamId());
+        }
+		return teamRepository.save(team);
 	}
 
 	@Override
 	public Team getTeamById(String teamId) throws EntityNotFoundException {
-		return inMemoryRepository.getTeamById(teamId);
+		 Optional<Team> optionalTeam = teamRepository.findById(teamId);
+	        if (!optionalTeam.isPresent()){
+	            throw new EntityNotFoundException(Team.class, "Team Id", teamId);
+	        }
+		return optionalTeam.get();
 	}
 
 	@Override
 	public List<Team> getAll() throws EntityNotFoundException {
-		return inMemoryRepository.getAll();
+		return  teamRepository.findAll();
 	}
 
 }
