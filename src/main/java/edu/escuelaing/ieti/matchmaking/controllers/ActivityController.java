@@ -39,9 +39,9 @@ public class ActivityController {
 	        return new ResponseEntity<>(activityService.update(activity), HttpStatus.OK);
 	    }
 
-	    @DeleteMapping("/{activityId}")
-	    public ResponseEntity<?> removeActivity(@PathVariable String activityId) throws EntityNotFoundException {
-	    	activityService.remove(activityId);
+	    @DeleteMapping
+	    public ResponseEntity<?> removeActivity(@RequestBody Activity activity) throws EntityNotFoundException {
+	    	activityService.remove(activity);
 	        return new ResponseEntity<>(HttpStatus.OK);
 	    }
 }

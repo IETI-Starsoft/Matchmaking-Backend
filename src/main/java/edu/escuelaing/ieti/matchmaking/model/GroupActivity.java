@@ -4,6 +4,9 @@ import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document
 @JsonTypeName("GroupActivity")
 public class GroupActivity extends Activity {
 
