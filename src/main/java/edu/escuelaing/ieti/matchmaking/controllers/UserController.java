@@ -1,6 +1,5 @@
 package edu.escuelaing.ieti.matchmaking.controllers;
 
-import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.User;
 import edu.escuelaing.ieti.matchmaking.services.UserService;
@@ -33,11 +32,6 @@ public class UserController {
     @GetMapping("/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable String userId) throws EntityNotFoundException {
         return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody User user) throws EntityExistsException {
-        return new ResponseEntity<>(userService.create(user), HttpStatus.CREATED);
     }
 
     @PutMapping
