@@ -12,6 +12,7 @@ import edu.escuelaing.ieti.matchmaking.model.Team;
 import edu.escuelaing.ieti.matchmaking.persistence.TeamRepository;
 import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
+import edu.escuelaing.ieti.matchmaking.exception.InsufficientFundsException;
 
 @Service
 public class InMemoryTeamRepository implements TeamRepository {
@@ -59,12 +60,26 @@ public class InMemoryTeamRepository implements TeamRepository {
 
 	@Override
 	public List<Team> getAll() throws EntityNotFoundException {
-		Set<Map.Entry<String, Team>> entrySet =teamMap.entrySet();
+		Set<Map.Entry<String, Team>> entrySet = teamMap.entrySet();
 		List<Team> teams = new ArrayList<>();
 		for (Map.Entry<String, Team> entry : entrySet) {
 			teams.add(entry.getValue());
 		}
 		return teams;
+	}
+
+	@Override
+	public void addCredits(String teamID, Integer amount) throws EntityNotFoundException {
+		Team team = getTeamById(teamID);
+		team.addCredits(amount);
+
+	}
+
+	@Override
+	public void subCredits(String teamID, Integer amount) throws InsufficientFundsException, EntityNotFoundException {
+		Team team = getTeamById(teamID);
+		team.subCredits(amount);
+
 	}
 
 }

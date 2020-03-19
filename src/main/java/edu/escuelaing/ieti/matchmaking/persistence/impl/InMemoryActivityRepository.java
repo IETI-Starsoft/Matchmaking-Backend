@@ -2,6 +2,7 @@ package edu.escuelaing.ieti.matchmaking.persistence.impl;
 
 import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
+import edu.escuelaing.ieti.matchmaking.exception.InsufficientFundsException;
 import edu.escuelaing.ieti.matchmaking.model.Activity;
 import edu.escuelaing.ieti.matchmaking.persistence.ActivityRepository;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ public class InMemoryActivityRepository implements ActivityRepository {
     @Override
     public Activity update(Activity activity) throws EntityNotFoundException {
         String activityId = activity.getId();
-        if (!activityMap.containsKey(activityId)){
+        if (!activityMap.containsKey(activityId)) {
             throw new EntityNotFoundException(Activity.class, "Activity", activity.toString());
         }
         activityMap.put(activityId, activity);
@@ -40,16 +41,16 @@ public class InMemoryActivityRepository implements ActivityRepository {
     @Override
     public Activity getById(String activityId) throws EntityNotFoundException {
         Activity activityFound = activityMap.get(activityId);
-        if (activityFound == null){
-			throw new EntityNotFoundException(Activity.class, "id Activity", activityId);
+        if (activityFound == null) {
+            throw new EntityNotFoundException(Activity.class, "id Activity", activityId);
         }
         return activityFound;
     }
 
     @Override
     public void remove(String activityId) throws EntityNotFoundException {
-        if (!activityMap.containsKey(activityId)){
-			throw new EntityNotFoundException(Activity.class, "id Activity", activityId);
+        if (!activityMap.containsKey(activityId)) {
+            throw new EntityNotFoundException(Activity.class, "id Activity", activityId);
         }
         activityMap.remove(activityId);
     }
@@ -62,5 +63,19 @@ public class InMemoryActivityRepository implements ActivityRepository {
             activitys.add(entry.getValue());
         }
         return activitys;
+    }
+
+    @Override
+    public void addCredits(String activityID, int amount) throws EntityNotFoundException {
+        Activity activity = getById(activityID);
+        activity.addCredits(amount);
+
+    }
+
+    @Override
+    public void subCredits(String activityID, int amount) throws InsufficientFundsException, EntityNotFoundException {
+        Activity activity = getById(activityID);
+        activity.subCredits(amount);
+
     }
 }

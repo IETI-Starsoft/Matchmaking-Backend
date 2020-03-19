@@ -2,6 +2,7 @@ package edu.escuelaing.ieti.matchmaking.persistence;
 
 import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
+import edu.escuelaing.ieti.matchmaking.exception.InsufficientFundsException;
 import edu.escuelaing.ieti.matchmaking.model.Activity;
 
 import java.util.List;
@@ -17,5 +18,9 @@ public interface ActivityRepository {
     void remove(String activityId) throws EntityNotFoundException;
 
     List<Activity> getAll();
+
+    void addCredits(String activityID, int amount) throws EntityNotFoundException;
+
+    void subCredits(String activityID, int amount) throws InsufficientFundsException, EntityNotFoundException;
 
 }

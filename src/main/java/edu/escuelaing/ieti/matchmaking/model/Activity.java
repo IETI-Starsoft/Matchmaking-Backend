@@ -7,24 +7,24 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "typ")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = GroupActivity.class, name = "GroupActivity"),
-        @JsonSubTypes.Type(value = IndividualActivity.class, name = "IndividualActivity")})
-public abstract class Activity  {
+@JsonSubTypes({ @JsonSubTypes.Type(value = GroupActivity.class, name = "GroupActivity"),
+        @JsonSubTypes.Type(value = IndividualActivity.class, name = "IndividualActivity") })
+public abstract class Activity {
 
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date;
-    @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
-    private Date publicationDate;  
-    private int bet; 
-    private String description; 
-    private String type; 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date publicationDate;
+    private int bet;
+    private String description;
+    private String type;
     private String location;
     private String id;
+    private Integer credits;
 
+    public Activity() {
+    }
 
-    public Activity(){}
-    
     public Date getDate() {
         return date;
     }
@@ -65,13 +65,13 @@ public abstract class Activity  {
         this.publicationDate = publicationDate;
     }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getLocation() {
         return location;
@@ -81,6 +81,12 @@ public abstract class Activity  {
         this.location = location;
     }
 
+    public void addCredits(Integer credits) {
+        this.credits += credits;
+    }
 
+    public void subCredits(Integer credits) {
+        this.credits -= credits;
+    }
 
 }
