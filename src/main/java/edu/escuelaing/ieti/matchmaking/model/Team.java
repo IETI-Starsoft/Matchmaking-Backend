@@ -10,25 +10,39 @@ public class Team {
 	private Integer credits;
 	private String teamId; 
 	
-	public User getCapitan() {
-		return captain;
-	}
-	public ArrayList<User> getIntegrantes() {
+	
+	public ArrayList<User> getMembers() {
 		return members;
 	}
+
+	public void setMembers(ArrayList<User> members) {
+		this.members = members;
+	}
+
+	public User getCaptain() {
+		return captain;
+	}
+
+	public void setCaptain(User captain) {
+		this.captain = captain;
+	}
+
+	public Integer getCredits() {
+		return credits;
+	}
+
+	public void setCredits(Integer credits) {
+		this.credits = credits;
+	}
+
 	public String getTeamId() {
 		return teamId;
 	}
-	public void setCapitan(User captain) {
-		this.captain = captain;
-	}
-	public void setIntegrantes(ArrayList<User> members) {
-		this.members = members;
-	}
-	
-	public void setNombreid(String teamId) {
+
+	public void setTeamId(String teamId) {
 		this.teamId = teamId;
 	}
+
 	public void addCredits(Integer credits) {
 		this.credits += credits;
 	}

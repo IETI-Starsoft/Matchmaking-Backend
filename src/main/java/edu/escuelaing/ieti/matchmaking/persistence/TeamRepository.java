@@ -20,5 +20,5 @@ public interface TeamRepository extends MongoRepository<Team, String>{
 
     List<Team> getAll() throws EntityNotFoundException;
     
-    boolean existsByTeamId (String teamId);
+    boolean existsById (String teamId);
 }
