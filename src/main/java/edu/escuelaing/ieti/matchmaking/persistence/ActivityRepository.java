@@ -12,15 +12,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ActivityRepository extends MongoRepository<Activity, String> {
-
-    Activity save(Activity activity);
-
-    Optional<Activity> findById(String activityId);
-
-    void delete(Activity activity);
-
-    List<Activity> findAll();
-
     boolean existsById(String id); 
-
 }
