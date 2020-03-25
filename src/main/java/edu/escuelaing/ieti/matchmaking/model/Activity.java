@@ -24,7 +24,8 @@ public abstract class Activity  {
     private String description; 
     private String type; 
     private String location;
-    
+    private Integer credits;
+
 
 
     public Activity(){}
@@ -85,6 +86,20 @@ public abstract class Activity  {
         this.location = location;
     }
 
+    public Integer getCredits() {
+        return credits;
+    }
 
+    public void setCredits(Integer credits) {
+        this.credits = credits;
+    }
+
+    public void addCredits(Integer credits){
+        this.credits += credits; 
+    }
+
+    public void subCredits(Integer credits){
+        this.credits -= credits;
+    }
 
 }
