@@ -44,10 +44,7 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public Team getTeamById(String teamId) throws EntityNotFoundException {
 		 Optional<Team> optionalTeam = teamRepository.findById(teamId);
-	        if (!optionalTeam.isPresent()){
-	            throw new EntityNotFoundException(Team.class, "Team Id", teamId);
-	        }
-		return optionalTeam.get();
+	     return optionalTeam.orElseThrow(() -> new EntityNotFoundException(Team.class, "Team Id", teamId));
 	}
 
 	@Override

@@ -48,19 +48,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(String userId) throws EntityNotFoundException {
         Optional<User> optionalUser = userRepository.findById(userId);
-        if (!optionalUser.isPresent()){
-            throw new EntityNotFoundException(User.class, "User id", userId);
-        }
-        return optionalUser.get();
+        return optionalUser.orElseThrow(() -> new EntityNotFoundException(User.class, "User id", userId));
     }
 
     @Override
     public User getUserByEmail(String email) throws EntityNotFoundException {
         Optional<User> optionalUser = userRepository.findByEmail(email);
-        if (!optionalUser.isPresent()){
-            throw new EntityNotFoundException(User.class, "User email", email);
-        }
-        return optionalUser.get();
+        return optionalUser.orElseThrow(() -> new EntityNotFoundException(User.class, "User email", email));
     }
 
     @Override
