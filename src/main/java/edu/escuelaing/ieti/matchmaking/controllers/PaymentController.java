@@ -20,68 +20,59 @@ public class PaymentController {
     @Autowired
     PaymentService paymentService;
 
-    @PutMapping
-    public ResponseEntity<?> rechargeCredits(@RequestParam(value = "user") String userID,
-            @RequestParam(value = "amount") int amount) throws MatchmakingException, EntityNotFoundException {
-
+    @PutMapping("/user/{userID}/amount/{amount}")
+    public ResponseEntity<?> rechargeCredits(@PathVariable String userID, @PathVariable int amount)
+            throws MatchmakingException, EntityNotFoundException {
         paymentService.rechargeCredits(userID, amount);
         return new ResponseEntity<>(HttpStatus.OK);
-
     }
 
-    @PutMapping
-    public ResponseEntity<?> addCreditsUserToUser(@RequestParam(value = "user1") String userID1,
-            @RequestParam(value = "user2") String userID2, @RequestParam(value = "amount") int amount)
-            throws EntityNotFoundException {
+    @PutMapping("/user/{userID1}/user/{userID2}/amount/{amount}")
+    public ResponseEntity<?> addCreditsUserToUser(@PathVariable String userID1, @PathVariable String userID2,
+            @PathVariable int amount) throws EntityNotFoundException {
 
         paymentService.addCreditsUserToUser(userID1, userID2, amount);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<?> addCreditsUserToTeam(@RequestParam(value = "user") String userID,
-            @RequestParam(value = "team") String teamID, @RequestParam(value = "amount") int amount)
-            throws EntityNotFoundException {
+    @PutMapping("/user/{userID}/team/{teamID}/amount/{amount}")
+    public ResponseEntity<?> addCreditsUserToTeam(@PathVariable String userID,
+            @PathVariable String teamID, @PathVariable int amount) throws EntityNotFoundException {
         paymentService.addCreditsUserToTeam(userID, teamID, amount);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<?> addCreditsTeamToUser(@RequestParam(value = "team") String teamID,
-            @RequestParam(value = "user") String userID, @RequestParam(value = "amount") int amount)
-            throws InsufficientFundsException, EntityNotFoundException {
+    @PutMapping("/team/{teamID}/user/{userID}/amount/{amount}")
+    public ResponseEntity<?> addCreditsTeamToUser(@PathVariable String teamID, @PathVariable String userID,
+            @PathVariable int amount) throws InsufficientFundsException, EntityNotFoundException {
         paymentService.addCreditsTeamToUser(teamID, userID, amount);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<?> betUserToActivity(@RequestParam(value = "user") String userID,
-            @RequestParam(value = "activity") String activityID, @RequestParam(value = "amount") int amount)
-            throws EntityNotFoundException {
+    @PutMapping("/user/{userID}/activity/{activityID}/amount/{amount}")
+    public ResponseEntity<?> betUserToActivity(@PathVariable String userID, @PathVariable String activityID,
+            @PathVariable int amount) throws EntityNotFoundException {
         paymentService.betUserToActivity(userID, activityID, amount);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<?> betTeamToActivity(@RequestParam(value = "team") String teamID,
-            @RequestParam(value = "activity") String activityID, @RequestParam(value = "amount") int amount)
-            throws InsufficientFundsException, EntityNotFoundException {
+    @PutMapping("/team/{teamID}/activity/{activityID}/amount/{amount}")
+    public ResponseEntity<?> betTeamToActivity(@PathVariable String teamID, @PathVariable String activityID,
+            @PathVariable int amount) throws InsufficientFundsException, EntityNotFoundException {
         paymentService.betTeamToActivity(teamID, activityID, amount);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<?> payActivityToUser(@RequestParam(value = "activity") String activityID,
-            @RequestParam(value = "user") String userID, @RequestParam(value = "amount") int amount)
-            throws EntityNotFoundException {
+    @PutMapping("/activity/{activityID}/user/{userID}/amount/{amount}")
+    public ResponseEntity<?> payActivityToUser(@PathVariable String activityID, @PathVariable String userID,
+            @PathVariable int amount) throws EntityNotFoundException {
         paymentService.payActivityToUser(activityID, userID, amount);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<?> payActivityToTeam(@RequestParam(value = "activity") String activityID,
-            @RequestParam(value = "team") String teamID, @RequestParam(value = "amount") int amount)
-            throws EntityNotFoundException {
+    @PutMapping("/activity/{activityID}/team/{teamID}/amount/{amount}")
+    public ResponseEntity<?> payActivityToTeam(@PathVariable String activityID, @PathVariable String teamID,
+            @PathVariable int amount) throws EntityNotFoundException {
         paymentService.payActivityToTeam(activityID, teamID, amount);
         return new ResponseEntity<>(HttpStatus.OK);
     }

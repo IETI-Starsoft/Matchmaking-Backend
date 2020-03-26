@@ -1,6 +1,7 @@
 package edu.escuelaing.ieti.matchmaking.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.exception.InsufficientFundsException;
@@ -13,6 +14,7 @@ import edu.escuelaing.ieti.matchmaking.services.PaymentService;
 import edu.escuelaing.ieti.matchmaking.services.TeamService;
 import edu.escuelaing.ieti.matchmaking.services.UserService;
 
+@Service
 public class PaymentServiceImpl implements PaymentService {
 
     @Autowired
