@@ -1,5 +1,7 @@
 package edu.escuelaing.ieti.matchmaking.services.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -66,6 +68,17 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public List<Team> getAll() throws EntityNotFoundException {
 		return  teamRepository.findAll();
+	}
+
+	@Override
+	public List<Team> getTeamsByCaptain(User captain){
+		ArrayList<Team> teams = new ArrayList<Team>();  
+		Iterable<Team> ite = teamRepository.findAllByCaptain(captain);
+		Iterator<Team> it = ite.iterator();
+		while(it.hasNext()){
+			teams.add(it.next());
+		}
+		return teams;
 	}
 
 }

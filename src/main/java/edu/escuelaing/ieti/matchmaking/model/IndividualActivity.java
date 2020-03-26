@@ -9,27 +9,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class IndividualActivity extends Activity{
 
      
-    private User player1;
-    private User player2;
+    private String idPlayer1;
+    private String idPlayer2;
 
 
     public IndividualActivity(){}
 
-    public User getPlayer1() {
-        return player1;
+    public String getIdPlayer1() {
+        return idPlayer1;
     }
 
-    public void setPlayer1(User player1) {
-        this.player1 = player1;
+    public void setIdPlayer1(String idPlayer1) {
+        this.idPlayer1 = idPlayer1;
     }
 
-    public User getPlayer2() {
-        return player2;
+    public String getIdPlayer2() {
+        return idPlayer2;
     }
 
-    public void setPlayer2(User player2) {
-        this.player2 = player2;
+    public void setIdPlayer2(String idPlayer2) {
+        this.idPlayer2 = idPlayer2;
     }
-
-  
 }

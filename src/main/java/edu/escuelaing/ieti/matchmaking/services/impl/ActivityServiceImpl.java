@@ -18,10 +18,7 @@ public class ActivityServiceImpl implements ActivityService {
     private ActivityRepository activityRepository;
 
     @Override
-    public Activity create(Activity activity) throws EntityExistsException {
-        if (activityRepository.existsById(activity.getId())){
-            throw new EntityExistsException(Activity.class, "Activity id", activity.getId());
-        }
+    public Activity create(Activity activity) {
         return activityRepository.save(activity);
     }
 
@@ -51,4 +48,6 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Activity> getAll() {
         return activityRepository.findAll();
     }
+
+  
 }

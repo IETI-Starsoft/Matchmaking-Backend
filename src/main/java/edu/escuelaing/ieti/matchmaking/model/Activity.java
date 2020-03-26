@@ -15,6 +15,7 @@ public abstract class Activity  {
 
     @Id
     private String id;
+    
     private Date date;
     private Date publicationDate;  
     private int bet; 
@@ -25,7 +26,6 @@ public abstract class Activity  {
 
 
 
-    public Activity(){}
     
     public Date getDate() {
         return date;

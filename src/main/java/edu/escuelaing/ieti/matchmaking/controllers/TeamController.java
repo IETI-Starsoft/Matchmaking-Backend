@@ -41,5 +41,12 @@ public class TeamController {
 	    public ResponseEntity<?> removeTeam(@PathVariable Team team) throws EntityNotFoundException {
 	    	teamService.remove(team);
 	        return new ResponseEntity<>(HttpStatus.OK);
-	    }
+		}
+		
+		@PostMapping("/captain")
+		public ResponseEntity<?> getAllTeams(@RequestBody User captain) throws EntityNotFoundException {
+			  List<Team> teams = null;
+				  teams = teamService.getTeamsByCaptain(captain);
+				  return new ResponseEntity<>(teams, HttpStatus.OK);
+		  }	
 }
