@@ -3,9 +3,10 @@ package edu.escuelaing.ieti.matchmaking.services;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.exception.InsufficientFundsException;
 import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
+import edu.escuelaing.ieti.matchmaking.model.User;
 
 public interface PaymentService {
-        void rechargeCredits(String userID, int amount) throws MatchmakingException, EntityNotFoundException;
+        User rechargeCredits(String userID, int amount) throws MatchmakingException, EntityNotFoundException;
 
         void addCreditsUserToUser(String userID1, String userID2, int amount) throws EntityNotFoundException;
 

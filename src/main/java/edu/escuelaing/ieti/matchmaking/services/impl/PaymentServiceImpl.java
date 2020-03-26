@@ -27,10 +27,11 @@ public class PaymentServiceImpl implements PaymentService {
     ActivityService activityService;
 
     @Override
-    public void rechargeCredits(String userID, int amount) throws MatchmakingException, EntityNotFoundException {
+    public User rechargeCredits(String userID, int amount) throws MatchmakingException, EntityNotFoundException {
         User user = userService.getUserById(userID);
         user.addCredits(amount);
         userService.update(user);
+        return user;
 
     }
 
