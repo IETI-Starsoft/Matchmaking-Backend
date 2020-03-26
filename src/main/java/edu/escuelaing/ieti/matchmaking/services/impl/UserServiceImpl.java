@@ -5,9 +5,9 @@ import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.User;
 import edu.escuelaing.ieti.matchmaking.persistence.UserRepository;
 import edu.escuelaing.ieti.matchmaking.services.UserService;
+import org.jasypt.util.password.PasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +17,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncryptor passwordEncryptor;
+
     @Override
     public User create(User user) throws EntityExistsException {
         if (userRepository.existsByEmail(user.getEmail())){
             throw new EntityExistsException(User.class, "User email", user.getEmail());
         }
+        user.setPassword(passwordEncryptor.encryptPassword(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -44,19 +48,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(String userId) throws EntityNotFoundException {
         Optional<User> optionalUser = userRepository.findById(userId);
-        if (!optionalUser.isPresent()){
-            throw new EntityNotFoundException(User.class, "User id", userId);
-        }
-        return optionalUser.get();
+        return optionalUser.orElseThrow(() -> new EntityNotFoundException(User.class, "User id", userId));
     }
 
     @Override
     public User getUserByEmail(String email) throws EntityNotFoundException {
         Optional<User> optionalUser = userRepository.findByEmail(email);
-        if (!optionalUser.isPresent()){
-            throw new EntityNotFoundException(User.class, "User email", email);
-        }
-        return optionalUser.get();
+        return optionalUser.orElseThrow(() -> new EntityNotFoundException(User.class, "User email", email));
     }
 
     @Override

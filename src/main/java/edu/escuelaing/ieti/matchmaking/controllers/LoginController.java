@@ -7,6 +7,7 @@ import edu.escuelaing.ieti.matchmaking.services.UserService;
 import edu.escuelaing.ieti.matchmaking.util.Token;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.jasypt.util.password.PasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,9 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PasswordEncryptor passwordEncryptor;
+
     @PostMapping("/login")
     public ResponseEntity<Token> login(@RequestBody User userLogin) throws ServletException, EntityNotFoundException {
         String jwtToken = "";
@@ -40,7 +44,7 @@ public class LoginController {
 
         String pwd = user.getPassword();
 
-        if (!password.equals(pwd)) {
+        if (!passwordEncryptor.checkPassword(password, pwd)) {
             throw new ServletException("Invalid login. Please check your name and password.");
         }
 
