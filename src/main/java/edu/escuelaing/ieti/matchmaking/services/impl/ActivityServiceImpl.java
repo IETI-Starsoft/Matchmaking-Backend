@@ -44,10 +44,7 @@ public class ActivityServiceImpl implements ActivityService {
     @Override
     public Activity getActivityById(String activityId) throws EntityNotFoundException {
         Optional<Activity> optionalActivity = activityRepository.findById(activityId);
-        if (!optionalActivity.isPresent()){
-            throw new EntityNotFoundException(Activity.class, "Activity id", activityId);
-        }
-        return optionalActivity.get();
+        return optionalActivity.orElseThrow(() -> new EntityNotFoundException(Activity.class, "Activity id", activityId));
     }
 
     @Override
