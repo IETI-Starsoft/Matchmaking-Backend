@@ -34,6 +34,16 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
     }
 
+    @GetMapping("/id/{userId}/friends")
+    public ResponseEntity<?> getUserFriendsById(@PathVariable String userId){
+        return new ResponseEntity<>(userService.getUserFriendsById(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/id/{userId}/teams")
+    public ResponseEntity<?> getUserTeamsById(@PathVariable String userId){
+        return new ResponseEntity<>(userService.getUserTeamsById(userId), HttpStatus.OK);
+    }
+
     @GetMapping("/email/{userEmail}")
     public ResponseEntity<?> getUserByEmail(@PathVariable String userEmail) throws EntityNotFoundException {
         return new ResponseEntity<>(userService.getUserByEmail(userEmail), HttpStatus.OK);
