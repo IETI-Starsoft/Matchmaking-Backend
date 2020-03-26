@@ -29,9 +29,14 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{userId}")
+    @GetMapping("/id/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable String userId) throws EntityNotFoundException {
         return new ResponseEntity<>(userService.getUserById(userId), HttpStatus.OK);
+    }
+
+    @GetMapping("/email/{userEmail}")
+    public ResponseEntity<?> getUserByEmail(@PathVariable String userEmail) throws EntityNotFoundException {
+        return new ResponseEntity<>(userService.getUserByEmail(userEmail), HttpStatus.OK);
     }
 
     @PutMapping
