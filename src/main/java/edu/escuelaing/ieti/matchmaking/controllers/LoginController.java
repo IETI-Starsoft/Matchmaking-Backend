@@ -30,7 +30,7 @@ public class LoginController {
     private PasswordEncryptor passwordEncryptor;
 
     @PostMapping("/login")
-    public ResponseEntity<Token> login(@RequestBody User userLogin) throws ServletException, EntityNotFoundException {
+    public ResponseEntity<?> login(@RequestBody User userLogin) throws ServletException, EntityNotFoundException {
         String jwtToken = "";
 
         if (userLogin.getEmail() == null || userLogin.getPassword() == null) {
@@ -51,7 +51,7 @@ public class LoginController {
         jwtToken = Jwts.builder().setSubject(email).claim("roles", "user").setIssuedAt(new Date()).signWith(
                 SignatureAlgorithm.HS256, "secretkey").compact();
 
-        return new ResponseEntity<>(new Token(jwtToken), HttpStatus.OK);
+        return new ResponseEntity<>(new Token(jwtToken, user), HttpStatus.OK);
     }
 
     @PostMapping("/register")
