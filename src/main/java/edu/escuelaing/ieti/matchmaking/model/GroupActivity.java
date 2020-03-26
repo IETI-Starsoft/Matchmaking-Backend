@@ -1,7 +1,5 @@
 package edu.escuelaing.ieti.matchmaking.model;
 
-import java.sql.Date;
-
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import org.springframework.data.mongodb.core.mapping.Document;
