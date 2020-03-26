@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @Configuration
 public class AppConfiguration {
@@ -28,6 +29,13 @@ public class AppConfiguration {
         MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
 
         return mongoTemplate;
+    }
+
+    @Bean 
+    public Jackson2ObjectMapperBuilder objectMapperBuilder() { 
+        Jackson2ObjectMapperBuilder builder = new Jackson2ObjectMapperBuilder(); 
+        builder.simpleDateFormat("yyyy-MM-dd'T'HH:mm:ss"); 
+        return builder; 
     }
 
 }
