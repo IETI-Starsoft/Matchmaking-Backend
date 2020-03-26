@@ -7,7 +7,7 @@ import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.Team;
 public interface TeamService {
 	
-	Team create(Team team)  throws EntityExistsException;
+	Team create(Team team)  throws EntityExistsException,EntityNotFoundException;
 
     void remove(Team team)  throws EntityNotFoundException;
 

@@ -25,7 +25,7 @@ public class TeamController {
 	       
 	    }
 	    @PostMapping
-	    public ResponseEntity<?> createTeam(@RequestBody Team team) throws EntityExistsException {
+	    public ResponseEntity<?> createTeam(@RequestBody Team team) throws EntityExistsException,EntityNotFoundException {
 	        return new ResponseEntity<>(teamService.create(team), HttpStatus.CREATED);
 	    }
 	    @GetMapping("/{teamId}")
