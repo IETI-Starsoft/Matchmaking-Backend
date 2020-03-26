@@ -7,24 +7,37 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class Team {
-	private ArrayList <User> members;
+	
+	@Id
+	private String teamId;
+	
+	private ArrayList <String> members;
 	
 	private User captain; 
+	
 	private Integer credits;
-	@Id
-	private String teamId; 
+	 
 	
+	private String name; 
 	
-	public ArrayList<User> getMembers() {
+	public ArrayList<String> getMembers() {
 		return members;
 	}
 
-	public void setMembers(ArrayList<User> members) {
+	public void setMembers(ArrayList<String> members) {
 		this.members = members;
 	}
 
 	public User getCaptain() {
 		return captain;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setCaptain(User captain) {
@@ -57,6 +70,7 @@ public class Team {
 	public String toString() {
         return "Team{" +
                 "teamId='" + teamId + '\'' +
+                "name='" + name + '\'' +
                 ", captain='" + captain.toString() + '\'' +
                 ", members='" + members.toString() + '\'' +
                 '}';
