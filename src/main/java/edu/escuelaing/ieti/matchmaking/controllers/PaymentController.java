@@ -6,12 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.exception.InsufficientFundsException;
 import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
+import edu.escuelaing.ieti.matchmaking.model.User;
 import edu.escuelaing.ieti.matchmaking.services.PaymentService;
 
 @RestController
@@ -23,8 +23,8 @@ public class PaymentController {
     @PutMapping("/user/{userID}/amount/{amount}")
     public ResponseEntity<?> rechargeCredits(@PathVariable String userID, @PathVariable int amount)
             throws MatchmakingException, EntityNotFoundException {
-        paymentService.rechargeCredits(userID, amount);
-        return new ResponseEntity<>(HttpStatus.OK);
+        User user = paymentService.rechargeCredits(userID, amount);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @PutMapping("/user/{userID1}/user/{userID2}/amount/{amount}")
@@ -36,8 +36,8 @@ public class PaymentController {
     }
 
     @PutMapping("/user/{userID}/team/{teamID}/amount/{amount}")
-    public ResponseEntity<?> addCreditsUserToTeam(@PathVariable String userID,
-            @PathVariable String teamID, @PathVariable int amount) throws EntityNotFoundException {
+    public ResponseEntity<?> addCreditsUserToTeam(@PathVariable String userID, @PathVariable String teamID,
+            @PathVariable int amount) throws EntityNotFoundException {
         paymentService.addCreditsUserToTeam(userID, teamID, amount);
         return new ResponseEntity<>(HttpStatus.OK);
     }
