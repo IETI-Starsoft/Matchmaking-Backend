@@ -3,6 +3,8 @@ package edu.escuelaing.ieti.matchmaking.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document
 public class User {
 
@@ -20,6 +22,10 @@ public class User {
     private Integer rating;
 
     private Integer credits;
+
+    private List<String> friends;
+
+    private List<String> teams;
 
     public String getFirstName() {
         return firstName;
@@ -95,5 +101,21 @@ public class User {
                 ", rating=" + rating +
                 ", credits=" + credits +
                 '}';
+    }
+
+    public List<String> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<String> friends) {
+        this.friends = friends;
+    }
+
+    public List<String> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<String> teams) {
+        this.teams = teams;
     }
 }
