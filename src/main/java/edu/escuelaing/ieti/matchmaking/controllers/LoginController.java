@@ -44,7 +44,7 @@ public class LoginController {
 
         String pwd = user.getPassword();
 
-        if (!passwordEncryptor.checkPassword(pwd, password)) {
+        if (!passwordEncryptor.checkPassword(password, pwd)) {
             throw new ServletException("Invalid login. Please check your name and password.");
         }
 

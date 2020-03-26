@@ -12,3 +12,6 @@ curl -H "Content-Type: application/json" -X PUT -d '{"firstName":"user1", "lastN
 
 POST login
 curl -H "Content-Type: application/json" -X POST -d '{"firstName":"user1", "lastName":"put", "email":"user1@mail.com", "password":"encrypt-this", "rating":4, "credits":100 }' http://localhost:8080/users/login
+
+PUT amount to user
+curl -X PUT http://localhost:8080/api/payment/user/5e7c165ce3bde43cd4d1471c/amount/155
