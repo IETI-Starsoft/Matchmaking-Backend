@@ -13,7 +13,7 @@ public class Team {
 	
 	private ArrayList <String> members;
 	
-	private User captain; 
+	private String captainId; 
 	
 	private Integer credits;
 	 
@@ -26,11 +26,7 @@ public class Team {
 
 	public void setMembers(ArrayList<String> members) {
 		this.members = members;
-	}
-
-	public User getCaptain() {
-		return captain;
-	}
+	}	
 
 	public String getName() {
 		return name;
@@ -38,10 +34,6 @@ public class Team {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public void setCaptain(User captain) {
-		this.captain = captain;
 	}
 
 	public Integer getCredits() {
@@ -71,8 +63,16 @@ public class Team {
         return "Team{" +
                 "teamId='" + teamId + '\'' +
                 "name='" + name + '\'' +
-                ", captain='" + captain.toString() + '\'' +
+                ", captain='" + captainId + '\'' +
                 ", members='" + members.toString() + '\'' +
                 '}';
+	}
+
+	public String getCaptainId() {
+		return captainId;
+	}
+
+	public void setCaptainId(String captainId) {
+		this.captainId = captainId;
 	}
 }

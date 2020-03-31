@@ -9,25 +9,25 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class GroupActivity extends Activity {
 
      
-    private Team team1;
-    private Team team2;
+    private String idTeam1;
+    private String idTeam2;
 
     public GroupActivity(){}
 
-    public Team getTeam1() {
-        return team1;
+    public String getIdTeam1() {
+        return idTeam1;
     }
 
-    public void setTeam1(Team team1) {
-        this.team1 = team1;
+    public void setIdTeam1(String idTeam1) {
+        this.idTeam1 = idTeam1;
     }
 
-    public Team getTeam2() {
-        return team2;
+    public String getIdTeam2() {
+        return idTeam2;
     }
 
-    public void setTeam2(Team team2) {
-        this.team2 = team2;
+    public void setIdTeam2(String idTeam2) {
+        this.idTeam2 = idTeam2;
     }
-  
+
 }

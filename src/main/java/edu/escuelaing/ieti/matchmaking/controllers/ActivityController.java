@@ -34,7 +34,7 @@ public class ActivityController {
 	        }
 	    }
 	    @PostMapping
-	    public ResponseEntity<?> createActivity(@RequestBody Activity activity) throws EntityExistsException {
+	    public ResponseEntity<Activity> createActivity(@RequestBody Activity activity) throws EntityExistsException {
 	        return new ResponseEntity<>(activityService.create(activity), HttpStatus.CREATED);
 	    }
 	    @GetMapping("/{activityId}")
@@ -46,9 +46,9 @@ public class ActivityController {
 	        return new ResponseEntity<>(activityService.update(activity), HttpStatus.OK);
 	    }
 
-	    @DeleteMapping
+	   @DeleteMapping
 	    public ResponseEntity<?> removeActivity(@RequestBody Activity activity) throws EntityNotFoundException {
 	    	activityService.remove(activity);
 	        return new ResponseEntity<>(HttpStatus.OK);
-	    }
+		}
 }

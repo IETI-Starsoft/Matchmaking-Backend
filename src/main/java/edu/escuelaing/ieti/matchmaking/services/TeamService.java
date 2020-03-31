@@ -16,4 +16,6 @@ public interface TeamService {
     Team getTeamById(String teamId)  throws EntityNotFoundException;
 
     List<Team> getAll()  throws EntityNotFoundException;
+
+    List<Team> getTeamsByCaptainId(String captainId);
 }
