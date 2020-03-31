@@ -5,7 +5,6 @@ import java.util.List;
 import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.Team;
-import edu.escuelaing.ieti.matchmaking.model.User;
 public interface TeamService {
 	
 	Team create(Team team)  throws EntityExistsException,EntityNotFoundException;
@@ -18,5 +17,5 @@ public interface TeamService {
 
     List<Team> getAll()  throws EntityNotFoundException;
 
-    List<Team> getTeamsByCaptain(User captain);
+    List<Team> getTeamsByCaptainId(String captainId);
 }

@@ -35,8 +35,8 @@ public class TeamServiceImpl implements TeamService {
 					userService.update(user);
 				}
 			}
-			User captain=team.getCaptain();
-			List <String> teamsCaptain=teamSave.getCaptain().getTeams();
+			User captain=userService.getUserById(team.getCaptainId());
+			List <String> teamsCaptain=captain.getTeams();
 			teamsCaptain.add(teamSave.getTeamId());
 			captain.setTeams(teamsCaptain);
 			userService.update(captain);
@@ -71,9 +71,9 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public List<Team> getTeamsByCaptain(User captain){
+	public List<Team> getTeamsByCaptainId(String captainId){
 		ArrayList<Team> teams = new ArrayList<Team>();  
-		Iterable<Team> ite = teamRepository.findAllByCaptain(captain);
+		Iterable<Team> ite = teamRepository.findAllByCaptainId(captainId);
 		Iterator<Team> it = ite.iterator();
 		while(it.hasNext()){
 			teams.add(it.next());
