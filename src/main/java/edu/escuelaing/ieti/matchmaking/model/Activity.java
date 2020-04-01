@@ -23,7 +23,7 @@ public abstract class Activity  {
     private String type; 
     private String location;
     private Integer credits;
-
+    private String winner; 
 
 
     
@@ -97,6 +97,14 @@ public abstract class Activity  {
 
     public void subCredits(Integer credits){
         this.credits -= credits;
+    }
+
+    public String getWinner() {
+        return winner;
+    }
+
+    public void setWinner(String winner) {
+        this.winner = winner;
     }
 
 }
