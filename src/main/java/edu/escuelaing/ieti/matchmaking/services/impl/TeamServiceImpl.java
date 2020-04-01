@@ -45,7 +45,7 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public void remove(Team team) throws EntityNotFoundException {
-		if (teamRepository.existsById(team.getTeamId())){
+		if (!teamRepository.existsById(team.getTeamId())){
             throw new EntityNotFoundException(Team.class, "Team Id", team.getTeamId());
         }
 		teamRepository.delete(team);
@@ -53,7 +53,7 @@ public class TeamServiceImpl implements TeamService {
 
 	@Override
 	public Team update(Team team) throws EntityNotFoundException {
-		if (teamRepository.existsById(team.getTeamId())){
+		if (!teamRepository.existsById(team.getTeamId())){
             throw new EntityNotFoundException(Team.class, "Team Id", team.getTeamId());
         }
 		return teamRepository.save(team);
