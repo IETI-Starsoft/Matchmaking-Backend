@@ -1,6 +1,5 @@
 package edu.escuelaing.ieti.matchmaking.services.impl;
 
-import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.persistence.ActivityRepository;
 import edu.escuelaing.ieti.matchmaking.services.ActivityService;
