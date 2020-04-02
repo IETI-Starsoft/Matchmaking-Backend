@@ -24,8 +24,8 @@ public abstract class Activity  {
     private String location;
     private Integer credits;
     private String winner; 
-
-
+    private State state;
+    private String owner;
     
     public Date getDate() {
         return date;
@@ -40,7 +40,7 @@ public abstract class Activity  {
     }
 
     public void setBet(int bet) {
-        this.bet = bet;
+            this.bet = bet;
     }
 
     public String getDescription() {
@@ -106,5 +106,33 @@ public abstract class Activity  {
     public void setWinner(String winner) {
         this.winner = winner;
     }
+
+    public State getState() {
+        return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    @Override
+    public String toString() {
+        return "Activity [bet=" + bet + ", credits=" + credits + ", date=" + date + ", description=" + description
+                + ", id=" + id + ", location=" + location + ", owner=" + owner + ", publicationDate=" + publicationDate
+                + ", state=" + state + ", type=" + type + ", winner=" + winner + "]";
+    }
+
+  
+
+   
+
 
 }
