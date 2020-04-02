@@ -32,6 +32,10 @@ public class TeamController {
 	    public ResponseEntity<?> getTeamById(@PathVariable String teamId) throws EntityNotFoundException {
 	        return new ResponseEntity<>(teamService.getTeamById(teamId), HttpStatus.OK);
 	    }
+	    @GetMapping("{teamId}/members")
+	    public ResponseEntity<?> getTeamMembersById(@PathVariable String teamId) throws EntityNotFoundException {
+	        return new ResponseEntity<>(teamService.getMembersByTeam(teamId), HttpStatus.OK);
+	    }
 	    @PutMapping
 	    public ResponseEntity<?> updateTeam(@RequestBody Team team) throws EntityNotFoundException {
 	        return new ResponseEntity<>(teamService.update(team), HttpStatus.OK);
