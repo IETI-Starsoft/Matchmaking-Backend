@@ -19,6 +19,8 @@ public class User {
 
     private String password;
 
+    private String imageFileURL;
+
     private Integer rating;
 
     private Integer credits;
@@ -117,5 +119,13 @@ public class User {
 
     public void setTeams(List<String> teams) {
         this.teams = teams;
+    }
+
+    public String getImageFileURL() {
+        return imageFileURL;
+    }
+
+    public void setImageFileURL(String imageFileURL) {
+        this.imageFileURL = imageFileURL;
     }
 }
