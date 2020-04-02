@@ -84,11 +84,13 @@ public class TeamServiceImpl implements TeamService {
 	@Override
 	public List<User> getMembersByTeam(String teamid) throws EntityNotFoundException {
 		Team team=getTeamById(teamid);
+		User captain= userService.getUserById(team.getCaptainId());
 		List<String> membersIds=team.getMembers();
 		List<User> members=new ArrayList<User>();
 		for(String memberid: membersIds) {
 			members.add(userService.getUserById(memberid));
 		}
+		members.add(captain);
 		return members;
 	}
 
