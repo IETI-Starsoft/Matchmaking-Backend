@@ -4,6 +4,7 @@ import java.util.List;
 
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.Activity;
+import edu.escuelaing.ieti.matchmaking.model.State;
 
 public interface ActivityService {
 
@@ -16,5 +17,7 @@ public interface ActivityService {
     Activity getActivityById(String activityId) throws EntityNotFoundException;
 
     List<Activity> getAll();
+
+    List<Activity> getActivities(String userId,State state);
 
 }
