@@ -13,4 +13,5 @@ import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 public interface TeamRepository extends MongoRepository<Team, String>{
     boolean existsById (String teamId);
     Iterable<Team> findAllByCaptainId(String captainId);
+    
 }
