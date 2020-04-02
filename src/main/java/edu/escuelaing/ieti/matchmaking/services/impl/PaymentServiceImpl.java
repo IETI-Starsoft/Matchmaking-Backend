@@ -82,7 +82,7 @@ public class PaymentServiceImpl implements PaymentService {
         Activity act = activityService.getActivityById(activityID);
         if (user.getCredits() >= amount) {
             user.subCredits(amount);
-            act.subCredits(amount);
+            act.addCredits(amount);
             userService.update(user);
             activityService.update(act);
 
