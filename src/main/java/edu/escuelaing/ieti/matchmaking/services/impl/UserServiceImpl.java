@@ -2,9 +2,11 @@ package edu.escuelaing.ieti.matchmaking.services.impl;
 
 import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
+import edu.escuelaing.ieti.matchmaking.model.Activity;
 import edu.escuelaing.ieti.matchmaking.model.Team;
 import edu.escuelaing.ieti.matchmaking.model.User;
 import edu.escuelaing.ieti.matchmaking.persistence.UserRepository;
+import edu.escuelaing.ieti.matchmaking.services.ActivityService;
 import edu.escuelaing.ieti.matchmaking.services.TeamService;
 import edu.escuelaing.ieti.matchmaking.services.UserService;
 import org.jasypt.util.password.PasswordEncryptor;
@@ -23,6 +25,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private TeamService teamService;
+
+    @Autowired
+    private ActivityService activityService;
 
     @Autowired
     private PasswordEncryptor passwordEncryptor;
@@ -85,7 +90,8 @@ public class UserServiceImpl implements UserService {
             user.getTeams().forEach(teamId -> {
                         try {
                             teams.add(teamService.getTeamById(teamId));
-                        } catch (EntityNotFoundException ignore) {}
+                        } catch (EntityNotFoundException ignore) {
+                        }
                     }
             );
         });
@@ -95,5 +101,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<Activity> getUserActivityById(String userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        List<Activity> activities = new ArrayList<>();
+        optionalUser.ifPresent(user -> {
+            user.getTeams().forEach(activityId -> {
+                        try {
+                            activities.add(activityService.getActivityById(activityId));
+                        } catch (EntityNotFoundException ignore) {
+                        }
+                    }
+            );
+        });
+        return activities;
     }
 }

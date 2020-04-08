@@ -29,6 +29,8 @@ public class User {
 
     private List<String> teams;
 
+    private List<String> activities;
+
     public String getFirstName() {
         return firstName;
     }
@@ -127,5 +129,13 @@ public class User {
 
     public void setImageFileURL(String imageFileURL) {
         this.imageFileURL = imageFileURL;
+    }
+
+    public List<String> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(List<String> activities) {
+        this.activities = activities;
     }
 }

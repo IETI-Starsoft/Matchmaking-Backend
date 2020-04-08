@@ -2,6 +2,7 @@ package edu.escuelaing.ieti.matchmaking.services;
 
 import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
+import edu.escuelaing.ieti.matchmaking.model.Activity;
 import edu.escuelaing.ieti.matchmaking.model.Team;
 import edu.escuelaing.ieti.matchmaking.model.User;
 
@@ -24,4 +25,6 @@ public interface UserService {
     List<Team> getUserTeamsById(String userId);
 
     List<User> getAll();
+
+    List<Activity> getUserActivityById(String userId);
 }
