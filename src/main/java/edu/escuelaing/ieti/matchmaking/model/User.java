@@ -25,6 +25,8 @@ public class User {
 
     private Integer credits;
 
+    private String bio;
+
     private List<String> friends;
 
     private List<String> teams;
@@ -137,5 +139,13 @@ public class User {
 
     public void setActivities(List<String> activities) {
         this.activities = activities;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
     }
 }
