@@ -100,13 +100,17 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public List<String> getTeamActivitiesById(String teamId) {
+	public List<Activity> getTeamActivitiesById(String teamId) {
 		Optional<Team> optionalTeam = teamRepository.findById(teamId);
-        List<String> activities = new ArrayList<>();
+        List<Activity> activities = new ArrayList<>();
         optionalTeam.ifPresent(team -> {
             team.getActivities().forEach(activityId -> {
-                    	activities.add(activityId);
-                    }
+					try {
+						activities.add(activityService.getActivityById(activityId));
+					} catch (EntityNotFoundException e) {
+						e.printStackTrace();
+					}
+                }
             );
         });
         return activities;
