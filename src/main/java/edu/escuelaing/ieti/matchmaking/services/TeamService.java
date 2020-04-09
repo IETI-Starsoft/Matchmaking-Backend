@@ -23,5 +23,5 @@ public interface TeamService {
 
     List<Team> getTeamsByCaptainId(String captainId);
 
-    List<String> getTeamActivitiesById(String teamId);
+    List<Activity> getTeamActivitiesById(String teamId);
 }
