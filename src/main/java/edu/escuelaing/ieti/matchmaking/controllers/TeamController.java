@@ -52,5 +52,10 @@ public class TeamController {
 			  List<Team> teams = null;
 				  teams = teamService.getTeamsByCaptainId(captainId);
 				  return new ResponseEntity<>(teams, HttpStatus.OK);
-		  }	
+		}	
+
+		@GetMapping("/{teamId}/activities")
+		public ResponseEntity<?> getTeamActivitiesById(@PathVariable String teamId){
+			return new ResponseEntity<>(teamService.getTeamActivitiesById(teamId), HttpStatus.OK);
+		}
 }

@@ -2,6 +2,7 @@ package edu.escuelaing.ieti.matchmaking.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,7 +18,8 @@ public class Team {
 	
 	private Integer credits;
 	 
-	
+	private List<String> activities;
+
 	private String name; 
 	
 	public ArrayList<String> getMembers() {
@@ -74,5 +76,13 @@ public class Team {
 
 	public void setCaptainId(String captainId) {
 		this.captainId = captainId;
+	}
+
+	public List<String> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(List<String> activities) {
+		this.activities = activities;
 	}
 }
