@@ -22,6 +22,8 @@ public interface UserService {
 
     List<User> getUserFriendsById(String userId);
 
+    List<User> getUserFriendsById(String userId, int page);
+
     List<Team> getUserTeamsById(String userId);
 
     List<User> getAll();

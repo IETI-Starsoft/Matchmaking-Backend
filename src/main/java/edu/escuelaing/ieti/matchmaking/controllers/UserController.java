@@ -39,6 +39,11 @@ public class UserController {
         return new ResponseEntity<>(userService.getUserFriendsById(userId), HttpStatus.OK);
     }
 
+    @GetMapping("/id/{userId}/friends/page/{page}")
+    public ResponseEntity<?> getUserFriendsById(@PathVariable String userId, @PathVariable int page){
+        return new ResponseEntity<>(userService.getUserFriendsById(userId, page), HttpStatus.OK);
+    }
+
     @GetMapping("/id/{userId}/teams")
     public ResponseEntity<?> getUserTeamsById(@PathVariable String userId){
         return new ResponseEntity<>(userService.getUserTeamsById(userId), HttpStatus.OK);
