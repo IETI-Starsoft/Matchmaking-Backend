@@ -108,7 +108,7 @@ public class UserServiceImpl implements UserService {
         Optional<User> optionalUser = userRepository.findById(userId);
         List<Activity> activities = new ArrayList<>();
         optionalUser.ifPresent(user -> {
-            user.getTeams().forEach(activityId -> {
+            user.getActivities().forEach(activityId -> {
                         try {
                             activities.add(activityService.getActivityById(activityId));
                         } catch (EntityNotFoundException ignore) {
