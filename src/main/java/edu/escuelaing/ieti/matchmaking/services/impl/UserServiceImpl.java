@@ -83,6 +83,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getUserFriendsById(String userId, int page) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        List<User> friends = new ArrayList<>();
+        optionalUser.ifPresent(user -> {
+            List<String> friendsId = user.getFriends();
+            int total = friendsId.size();
+            for (int i = page*10-10; i < total && i < page*10; i++){
+                userRepository.findById(friendsId.get(i)).ifPresent(friends::add);
+            }
+        });
+        return friends;
+    }
+
+    @Override
     public List<Team> getUserTeamsById(String userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
         List<Team> teams = new ArrayList<>();
