@@ -9,6 +9,7 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import edu.escuelaing.ieti.matchmaking.model.Activity;
+import edu.escuelaing.ieti.matchmaking.model.Filter;
 import edu.escuelaing.ieti.matchmaking.model.GroupActivity;
 import edu.escuelaing.ieti.matchmaking.model.IndividualActivity;
 import edu.escuelaing.ieti.matchmaking.model.State;
@@ -70,6 +71,70 @@ public class ActivityServiceImpl implements ActivityService {
         }
         return rta;
     }
+
+	@Override
+	public List<Activity> getAvailableActivitiesByTypeActiviti(String userId,Filter filter) {
+		Query query = new Query();
+        ArrayList<Activity> rta = new ArrayList<Activity>();
+        query.addCriteria(Criteria.where("state").is(filter.getStateActiviti()));
+        System.out.println(filter.toString());
+        query.addCriteria(Criteria.where("type").is(filter.getLabels().get(0)));
+        query.skip(4*filter.getPag()).limit(4);
+        for (Activity act: mongoOperation.find(query, Activity.class)){
+            if(!act.getOwner().equals(userId)){
+                rta.add(act);
+            } 
+        }
+        return rta;
+		
+	}
+	@Override
+	public List<Activity> getAvailableActivitiesFilter(String userId,Filter filter) {
+		Query query = new Query();
+        ArrayList<Activity> rta = new ArrayList<Activity>();
+        query.addCriteria(Criteria.where("state").is(filter.getStateActiviti()));
+        query.skip(4*filter.getPag()).limit(4);
+        for (Activity act: mongoOperation.find(query, Activity.class)){
+            if(!act.getOwner().equals(userId)){
+                rta.add(act);
+            } 
+        }
+        return rta;
+		
+	}
+	@Override
+	public List<Activity> getAvailableActivitiesByParticipants(String userId, Filter filter) {
+		Query query = new Query();
+        ArrayList<Activity> rta = new ArrayList<Activity>();
+        query.addCriteria(Criteria.where("state").is(filter.getStateActiviti()));
+        query.addCriteria(Criteria.where("_class").is("edu.escuelaing.ieti.matchmaking.model."+filter.getParticipants()));
+        query.skip(4*filter.getPag()).limit(4);
+        for (Activity act: mongoOperation.find(query, Activity.class)){
+            if(!act.getOwner().equals(userId)){
+            	System.out.println(act);
+                rta.add(act);
+            } 
+        }
+        return rta;
+	}
+
+	@Override
+	public List<Activity> getAvailableActivitiesByRangeCredrits(String userId, Filter filter) {
+		Query query = new Query();
+        ArrayList<Activity> rta = new ArrayList<Activity>();
+        query.addCriteria(Criteria.where("state").is(filter.getStateActiviti()));
+        System.out.println(filter.getRangeCredrits().get(1));
+        System.out.println(filter.getRangeCredrits().get(0));
+        System.out.println(filter.getPag());
+        query.addCriteria(Criteria.where("bet").lt(filter.getRangeCredrits().get(1)).gt(filter.getRangeCredrits().get(0)));
+        query.skip(4*filter.getPag()).limit(4);
+        for (Activity act: mongoOperation.find(query, Activity.class)){
+            if(!act.getOwner().equals(userId)){
+                rta.add(act);
+            } 
+        }
+        return rta;
+	}
 
   
 }

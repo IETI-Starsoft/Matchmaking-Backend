@@ -3,6 +3,7 @@ package edu.escuelaing.ieti.matchmaking.controllers;
 import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.model.Activity;
+import edu.escuelaing.ieti.matchmaking.model.Filter;
 import edu.escuelaing.ieti.matchmaking.model.State;
 import edu.escuelaing.ieti.matchmaking.services.ActivityService;
 import java.util.List;
@@ -63,6 +64,52 @@ public class ActivityController {
 		List<Activity> activities = null;
 		try {
 			activities = activityService.getActivities(userId,state);
+			return new ResponseEntity<>(activities, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	@PostMapping("/filters/none")
+	public ResponseEntity<?> getAvailableActivitiesFilter(@RequestBody Filter filter) {
+		System.out.println(filter.getLabels().toString());
+		List<Activity> activities = null;
+		try {
+			activities=activityService.getAvailableActivitiesFilter(filter.getUserConsulting(), filter);
+			return new ResponseEntity<>(activities, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	@PostMapping("/filters/activiti")
+	public ResponseEntity<?> getAvailableActivitiesByTypeActiviti(@RequestBody Filter filter) {
+		System.out.println(filter.getLabels().toString());
+		List<Activity> activities = null;
+		try {
+			activities=activityService.getAvailableActivitiesByTypeActiviti(filter.getUserConsulting(), filter);
+			return new ResponseEntity<>(activities, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	@PostMapping("/filters/participants")
+	public ResponseEntity<?> getAvailableActivitiesByParticipants(@RequestBody Filter filter) {
+		List<Activity> activities = null;
+		try {
+			activities=activityService.getAvailableActivitiesByParticipants(filter.getUserConsulting(), filter);
+			return new ResponseEntity<>(activities, HttpStatus.OK);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	@PostMapping("/filters/rangeCredrits")
+	public ResponseEntity<?> getAvailableActivitiesByRangeCredrits(@RequestBody Filter filter) {
+		List<Activity> activities = null;
+		try {
+			activities=activityService.getAvailableActivitiesByRangeCredrits(filter.getUserConsulting(), filter);
 			return new ResponseEntity<>(activities, HttpStatus.OK);
 		} catch (Exception e) {
 			e.printStackTrace();
