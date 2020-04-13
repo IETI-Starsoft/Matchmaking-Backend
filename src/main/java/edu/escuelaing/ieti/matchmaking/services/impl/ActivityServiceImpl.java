@@ -77,7 +77,6 @@ public class ActivityServiceImpl implements ActivityService {
 		Query query = new Query();
         ArrayList<Activity> rta = new ArrayList<Activity>();
         query.addCriteria(Criteria.where("state").is(filter.getStateActiviti()));
-        System.out.println(filter.toString());
         query.addCriteria(Criteria.where("type").is(filter.getLabels().get(0)));
         query.skip(4*filter.getPag()).limit(4);
         for (Activity act: mongoOperation.find(query, Activity.class)){
@@ -111,7 +110,6 @@ public class ActivityServiceImpl implements ActivityService {
         query.skip(4*filter.getPag()).limit(4);
         for (Activity act: mongoOperation.find(query, Activity.class)){
             if(!act.getOwner().equals(userId)){
-            	System.out.println(act);
                 rta.add(act);
             } 
         }
@@ -123,9 +121,6 @@ public class ActivityServiceImpl implements ActivityService {
 		Query query = new Query();
         ArrayList<Activity> rta = new ArrayList<Activity>();
         query.addCriteria(Criteria.where("state").is(filter.getStateActiviti()));
-        System.out.println(filter.getRangeCredrits().get(1));
-        System.out.println(filter.getRangeCredrits().get(0));
-        System.out.println(filter.getPag());
         query.addCriteria(Criteria.where("bet").lt(filter.getRangeCredrits().get(1)).gt(filter.getRangeCredrits().get(0)));
         query.skip(4*filter.getPag()).limit(4);
         for (Activity act: mongoOperation.find(query, Activity.class)){

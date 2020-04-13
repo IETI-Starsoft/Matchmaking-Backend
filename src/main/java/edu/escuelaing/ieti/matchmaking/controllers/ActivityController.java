@@ -72,7 +72,6 @@ public class ActivityController {
 	}
 	@PostMapping("/filters/none")
 	public ResponseEntity<?> getAvailableActivitiesFilter(@RequestBody Filter filter) {
-		System.out.println(filter.getLabels().toString());
 		List<Activity> activities = null;
 		try {
 			activities=activityService.getAvailableActivitiesFilter(filter.getUserConsulting(), filter);
@@ -84,7 +83,6 @@ public class ActivityController {
 	}
 	@PostMapping("/filters/activiti")
 	public ResponseEntity<?> getAvailableActivitiesByTypeActiviti(@RequestBody Filter filter) {
-		System.out.println(filter.getLabels().toString());
 		List<Activity> activities = null;
 		try {
 			activities=activityService.getAvailableActivitiesByTypeActiviti(filter.getUserConsulting(), filter);
