@@ -26,6 +26,8 @@ public interface UserService {
 
     List<Team> getUserTeamsById(String userId);
 
+    List<String> getUsersEmailContaining(String searchStr, int limitTo);
+
     List<User> getAll();
 
     List<Activity> getUserActivityById(String userId);

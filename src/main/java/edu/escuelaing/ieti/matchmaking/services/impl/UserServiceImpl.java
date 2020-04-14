@@ -113,6 +113,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<String> getUsersEmailContaining(String searchStr, int limitTo) {
+        List<User> usersFound = userRepository.findByEmailContaining(searchStr);
+        System.out.println(searchStr);
+        List<String> emails = new ArrayList<>();
+
+        int limit = Math.min(usersFound.size(), limitTo);
+        usersFound.subList(0, limit).forEach(user -> {
+            emails.add(user.getEmail());
+        });
+
+        return emails;
+    }
+
+    @Override
     public List<User> getAll() {
         return userRepository.findAll();
     }
