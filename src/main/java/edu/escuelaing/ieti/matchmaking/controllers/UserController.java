@@ -64,6 +64,11 @@ public class UserController {
         return new ResponseEntity<>(userService.update(user), HttpStatus.OK);
     }
 
+    @PostMapping("/id/{userId}/friends/{userEmail}")
+    public ResponseEntity<?> addFriendToUser(@PathVariable String userId, @PathVariable String userEmail) throws EntityNotFoundException {
+        return new ResponseEntity<>(userService.addFriendToUser(userId, userEmail), HttpStatus.OK);
+    }
+
     @DeleteMapping
     public ResponseEntity<?> removeUser(@RequestBody User user) throws EntityNotFoundException {
         userService.remove(user);

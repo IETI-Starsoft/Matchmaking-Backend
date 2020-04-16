@@ -113,6 +113,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<String> getUsersNotFriendsWithEmailContaining(String userId, String searchStr, int limitTo) throws EntityNotFoundException {
+        User user = getUserById(userId);
+        List<User> usersFound = userRepository.findByEmailContaining(searchStr);
+        List<String> emails = new ArrayList<>();
+
+        int limit = Math.min(usersFound.size(), limitTo);
+        usersFound.subList(0, limit).forEach(foundUser -> {
+            String friendId = foundUser.getUserId();
+            String friendEmail = foundUser.getEmail();
+            if (!user.getEmail().equals(friendEmail) && !user.getFriends().contains(friendId)){
+                emails.add(friendEmail);
+            }
+        });
+
+        return emails;
+    }
+
+    @Override
+    public User addFriendToUser(String userId, String userFriendEmail) throws EntityNotFoundException {
+        User user = getUserById(userId);
+        User friendUser = getUserByEmail(userFriendEmail);
+        user.getFriends().add(friendUser.getUserId());
+        userRepository.save(user);
+        return user;
+    }
+
+    @Override
     public List<User> getAll() {
         return userRepository.findAll();
     }
