@@ -8,25 +8,25 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.data.annotation.Id;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "typ")
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = GroupActivity.class, name = "GroupActivity"),
-        @JsonSubTypes.Type(value = IndividualActivity.class, name = "IndividualActivity")})
-public abstract class Activity  {
+@JsonSubTypes({ @JsonSubTypes.Type(value = GroupActivity.class, name = "GroupActivity"),
+        @JsonSubTypes.Type(value = IndividualActivity.class, name = "IndividualActivity") })
+public abstract class Activity {
 
     @Id
     private String id;
-    
+
     private Date date;
-    private Date publicationDate;  
-    private int bet; 
-    private String description; 
-    private String type; 
+    private Date publicationDate;
+    private int bet;
+    private String description;
+    private String type;
     private String location;
     private Integer credits;
-    private String winner; 
+    private String winner;
+    private String loser;
     private State state;
     private String owner;
-    
+
     public Date getDate() {
         return date;
     }
@@ -40,7 +40,7 @@ public abstract class Activity  {
     }
 
     public void setBet(int bet) {
-            this.bet = bet;
+        this.bet = bet;
     }
 
     public String getDescription() {
@@ -67,13 +67,13 @@ public abstract class Activity  {
         this.publicationDate = publicationDate;
     }
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getLocation() {
         return location;
@@ -91,11 +91,11 @@ public abstract class Activity  {
         this.credits = credits;
     }
 
-    public void addCredits(Integer credits){
-        this.credits += credits; 
+    public void addCredits(Integer credits) {
+        this.credits += credits;
     }
 
-    public void subCredits(Integer credits){
+    public void subCredits(Integer credits) {
         this.credits -= credits;
     }
 
@@ -123,16 +123,20 @@ public abstract class Activity  {
         this.owner = owner;
     }
 
+    public String getLoser() {
+        return loser;
+    }
+
+    public void setLoser(String loser) {
+        this.loser = loser;
+    }
+
     @Override
     public String toString() {
         return "Activity [bet=" + bet + ", credits=" + credits + ", date=" + date + ", description=" + description
-                + ", id=" + id + ", location=" + location + ", owner=" + owner + ", publicationDate=" + publicationDate
-                + ", state=" + state + ", type=" + type + ", winner=" + winner + "]";
+                + ", id=" + id + ", location=" + location + ", loser=" + loser + ", owner=" + owner
+                + ", publicationDate=" + publicationDate + ", state=" + state + ", type=" + type + ", winner=" + winner
+                + "]";
     }
-
-  
-
-   
-
 
 }
