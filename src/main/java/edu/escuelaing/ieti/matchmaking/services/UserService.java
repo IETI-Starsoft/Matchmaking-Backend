@@ -26,6 +26,8 @@ public interface UserService {
 
     List<Team> getUserTeamsById(String userId);
 
+    List<Team> getUserTeamsById(String userId, int page);
+
     List<String> getUsersNotFriendsWithEmailContaining(String userId, String searchStr, int limitTo) throws EntityNotFoundException;
 
     User addFriendToUser(String userId, String userFriendEmail) throws EntityNotFoundException;
