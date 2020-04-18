@@ -113,6 +113,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<Team> getUserTeamsById(String userId, int page) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        List<Team> teams = new ArrayList<>();
+        optionalUser.ifPresent(user -> {
+            List<String> userTeams = user.getTeams();
+            int total = userTeams.size();
+            for (int i = page*10-10; i < total && i < page*10; i++){
+                try {
+                    teams.add(teamService.getTeamById(userTeams.get(i)));
+                } catch (EntityNotFoundException ignore) {}
+            }
+        });
+        return teams;
+    }
+
+    @Override
     public List<String> getUsersNotFriendsWithEmailContaining(String userId, String searchStr, int limitTo) throws EntityNotFoundException {
         User user = getUserById(userId);
         List<User> usersFound = userRepository.findByEmailContaining(searchStr);
