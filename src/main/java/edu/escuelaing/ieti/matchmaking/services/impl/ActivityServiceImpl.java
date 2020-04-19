@@ -1,10 +1,12 @@
 package edu.escuelaing.ieti.matchmaking.services.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -18,9 +20,13 @@ import edu.escuelaing.ieti.matchmaking.model.State;
 import edu.escuelaing.ieti.matchmaking.persistence.ActivityRepository;
 import edu.escuelaing.ieti.matchmaking.services.ActivityService;
 import edu.escuelaing.ieti.matchmaking.services.PaymentService;
+import edu.escuelaing.ieti.matchmaking.services.WaitTestService;
 
 @Service
+@Scope(value = "singleton")
 public class ActivityServiceImpl implements ActivityService {
+
+    private HashMap<String, Wait> waitingActivities = new HashMap<>();
 
     @Autowired
     private ActivityRepository activityRepository;
@@ -30,6 +36,9 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
     private MongoOperations mongoOperation;
+
+    @Autowired
+    private WaitTestService waitTestService;
 
     @Override
     public Activity create(Activity activity) {
@@ -146,15 +155,28 @@ public class ActivityServiceImpl implements ActivityService {
         Activity act = getActivityById(activityId);
         if (act.getWinner() == null) {
             if (act.getLoser() != null) {
-                act = finishActivityPay(winner, act);
-                act.setState(State.Finished);
+                if (waitingActivities.containsKey(activityId)) {
+                    waitingActivities.get(activityId).stop();
+                    waitingActivities.remove(activityId);
+
+                    act = finishActivityPay(winner, act);
+                    act.setState(State.Finished);
+                    act.setWinner(winner);
+                    update(act);
+                }
+
+            } else {
+                act.setWinner(winner);
+                act = update(act);
+                Wait wait = waitTestService.newWait("winner", act, winner);
+                waitingActivities.put(activityId, wait);
+                wait.start();
             }
-            act.setWinner(winner);
         } else {
             act = invalidState(winner, act.getWinner(), act);
             act.setState(State.Finished);
+            update(act);
         }
-        update(act);
         return act;
     }
 
@@ -164,15 +186,27 @@ public class ActivityServiceImpl implements ActivityService {
         Activity act = getActivityById(activityId);
         if (act.getLoser() == null) {
             if (act.getWinner() != null) {
-                act = finishActivityPay(act.getWinner(), act);
-                act.setState(State.Finished);
+                if (waitingActivities.containsKey(activityId)) {
+                    waitingActivities.get(activityId).stop();
+                    waitingActivities.remove(activityId);
+
+                    act = finishActivityPay(act.getWinner(), act);
+                    act.setState(State.Finished);
+                    act.setLoser(loser);
+                    update(act);
+                }
+            } else {
+                act.setLoser(loser);
+                act = update(act);
+                Wait wait = waitTestService.newWait("loser", act, loser);
+                waitingActivities.put(activityId, wait);
+                wait.start();
             }
-            act.setLoser(loser);
         } else {
             act = invalidState(loser, act.getLoser(), act);
             act.setState(State.Finished);
+            update(act);
         }
-        update(act);
         return act;
     }
 
@@ -186,7 +220,6 @@ public class ActivityServiceImpl implements ActivityService {
                 paymentService.payActivityToUser(act.getId(), userId1, creditsUser);
                 paymentService.payActivityToUser(act.getId(), userId2, creditsUser);
             } else {
-                System.out.println(act.getClass().getSimpleName());
                 paymentService.payActivityToTeam(act.getId(), userId1, creditsUser);
                 paymentService.payActivityToTeam(act.getId(), userId2, creditsUser);
             }
@@ -194,7 +227,7 @@ public class ActivityServiceImpl implements ActivityService {
         return getActivityById(act.getId());
     }
 
-    private Activity finishActivityPay(String winner, Activity act) throws EntityNotFoundException {
+    public Activity finishActivityPay(String winner, Activity act) throws EntityNotFoundException {
         if (act.getBet() > 0) {
             int credits = act.getCredits();
             int pay = (int) Math.round(credits * 0.85);
@@ -205,6 +238,12 @@ public class ActivityServiceImpl implements ActivityService {
             }
         }
         return getActivityById(act.getId());
+    }
+
+    public void removeWait(String activityId) {
+        if (waitingActivities.containsKey(activityId)) {
+            waitingActivities.remove(activityId);
+        }
     }
 
 }
