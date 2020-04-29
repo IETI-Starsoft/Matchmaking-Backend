@@ -2,6 +2,8 @@ package edu.escuelaing.ieti.matchmaking.controllers;
 import edu.escuelaing.ieti.matchmaking.exception.EntityExistsException;
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
 import edu.escuelaing.ieti.matchmaking.exception.MatchmakingException;
+import edu.escuelaing.ieti.matchmaking.model.Activity;
+import edu.escuelaing.ieti.matchmaking.model.Filter;
 import edu.escuelaing.ieti.matchmaking.model.Team;
 import edu.escuelaing.ieti.matchmaking.model.User;
 import edu.escuelaing.ieti.matchmaking.services.TeamService;
@@ -57,5 +59,20 @@ public class TeamController {
 		@GetMapping("/{teamId}/activities")
 		public ResponseEntity<?> getTeamActivitiesById(@PathVariable String teamId){
 			return new ResponseEntity<>(teamService.getTeamActivitiesById(teamId), HttpStatus.OK);
+		}
+		@PostMapping("/filters/activiti")
+		public ResponseEntity<?> getTeamActivitiesByActiviti(@RequestBody Filter filter){
+			List<Activity> activities=teamService.getActivitiesBtActiviti(filter); 
+			return new ResponseEntity<>(activities,HttpStatus.OK);
+		}
+		@PostMapping("/filters/rangeCredrits")
+		public ResponseEntity<?> getTeamActivitiesByRangeCredrits(@RequestBody Filter filter){
+			List<Activity> activities=teamService.getAllActivitiesByRangeCredits(filter); 
+			return new ResponseEntity<>(activities,HttpStatus.OK);
+		}
+		@PostMapping("/filters/none")
+		public ResponseEntity<?> getTeamActivitiesByNoneFilter(@RequestBody Filter filter){
+			List<Activity> activities=teamService.getAllActivitiesByNoneFilter(filter);
+			return new ResponseEntity<>(activities,HttpStatus.OK);
 		}
 }
