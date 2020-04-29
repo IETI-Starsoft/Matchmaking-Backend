@@ -10,8 +10,14 @@ public class Filter {
 	private String userConsulting;
 	private Integer pag;
 	private State stateActiviti;
+	private String team; 
 	
-	
+	public String getTeam() {
+		return team;
+	}
+	public void setTeam(String team) {
+		this.team = team;
+	}
 	public State getStateActiviti() {
 		return stateActiviti;
 	}
