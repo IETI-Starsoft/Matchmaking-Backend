@@ -1,6 +1,8 @@
 package edu.escuelaing.ieti.matchmaking.controllers;
 
 import edu.escuelaing.ieti.matchmaking.exception.EntityNotFoundException;
+import edu.escuelaing.ieti.matchmaking.model.Activity;
+import edu.escuelaing.ieti.matchmaking.model.Filter;
 import edu.escuelaing.ieti.matchmaking.model.User;
 import edu.escuelaing.ieti.matchmaking.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,11 +75,25 @@ public class UserController {
     public ResponseEntity<?> addFriendToUser(@PathVariable String userId, @PathVariable String userEmail) throws EntityNotFoundException {
         return new ResponseEntity<>(userService.addFriendToUser(userId, userEmail), HttpStatus.OK);
     }
-
     @DeleteMapping
     public ResponseEntity<?> removeUser(@RequestBody User user) throws EntityNotFoundException {
         userService.remove(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @PostMapping("/filters/activiti")
+	public ResponseEntity<?> getTeamActivitiesByActiviti(@RequestBody Filter filter){
+		List<Activity> activities=userService.getActivitiesBytActiviti(filter); 
+		return new ResponseEntity<>(activities,HttpStatus.OK);
+	}
+	@PostMapping("/filters/rangeCredrits")
+	public ResponseEntity<?> getTeamActivitiesByRangeCredrits(@RequestBody Filter filter){
+		List<Activity> activities=userService.getAllActivitiesByRangeCredits(filter); 
+		return new ResponseEntity<>(activities,HttpStatus.OK);
+	}
+	@PostMapping("/filters/none")
+	public ResponseEntity<?> getTeamActivitiesByNoneFilter(@RequestBody Filter filter){
+		List<Activity> activities=userService.getAllActivitiesByNoneFilter(filter);
+		return new ResponseEntity<>(activities,HttpStatus.OK);
+	}
 
 }
