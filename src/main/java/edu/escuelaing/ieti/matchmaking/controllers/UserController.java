@@ -80,9 +80,9 @@ public class UserController {
         userService.remove(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-    @PostMapping("/filters/activiti")
-	public ResponseEntity<?> getTeamActivitiesByActiviti(@RequestBody Filter filter){
-		List<Activity> activities=userService.getActivitiesBytActiviti(filter); 
+    @PostMapping("/filters/activity")
+	public ResponseEntity<?> getTeamActivitiesByActivity(@RequestBody Filter filter){
+		List<Activity> activities=userService.getActivitiesBytActivity(filter); 
 		return new ResponseEntity<>(activities,HttpStatus.OK);
 	}
 	@PostMapping("/filters/rangeCredrits")

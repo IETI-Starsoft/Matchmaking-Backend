@@ -27,7 +27,7 @@ public interface TeamService {
 
 	List<Activity> getTeamActivitiesById(String teamId);
 
-	List<Activity> getActivitiesBtActiviti(Filter filter);
+	List<Activity> getActivitiesBtActivity(Filter filter);
 
 	List<Activity> getAllActivitiesByTeams(Filter filter);
 

@@ -37,7 +37,7 @@ public interface UserService {
 
     List<Activity> getUserActivityById(String userId);
 
-	List<Activity> getActivitiesBytActiviti(Filter filter);
+	List<Activity> getActivitiesBytActivity(Filter filter);
 
 	List<Activity> getAllActivitiesByRangeCredits(Filter filter);
 
