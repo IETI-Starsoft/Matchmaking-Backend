@@ -60,9 +60,9 @@ public class TeamController {
 		public ResponseEntity<?> getTeamActivitiesById(@PathVariable String teamId){
 			return new ResponseEntity<>(teamService.getTeamActivitiesById(teamId), HttpStatus.OK);
 		}
-		@PostMapping("/filters/activiti")
-		public ResponseEntity<?> getTeamActivitiesByActiviti(@RequestBody Filter filter){
-			List<Activity> activities=teamService.getActivitiesBtActiviti(filter); 
+		@PostMapping("/filters/activity")
+		public ResponseEntity<?> getTeamActivitiesByActivity(@RequestBody Filter filter){
+			List<Activity> activities=teamService.getActivitiesBtActivity(filter); 
 			return new ResponseEntity<>(activities,HttpStatus.OK);
 		}
 		@PostMapping("/filters/rangeCredrits")

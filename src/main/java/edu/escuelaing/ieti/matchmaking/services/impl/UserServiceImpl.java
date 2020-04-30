@@ -177,7 +177,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<Activity> getActivitiesBytActiviti(Filter filter) {
+	public List<Activity> getActivitiesBytActivity(Filter filter) {
 		List<Activity> activities = getUserActivityById(filter.getUserConsulting());
 		List<Activity> rta = new ArrayList<>();
 		activities.forEach(activiti -> {

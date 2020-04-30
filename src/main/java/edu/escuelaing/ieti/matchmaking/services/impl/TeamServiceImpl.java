@@ -119,7 +119,7 @@ public class TeamServiceImpl implements TeamService {
 	}
 
 	@Override
-	public List<Activity> getActivitiesBtActiviti(Filter filter) {
+	public List<Activity> getActivitiesBtActivity(Filter filter) {
 		List<Activity> rta = new ArrayList<>();
 		List<Activity> activities = getAllActivitiesByTeams(filter);
 		activities.forEach(activiti -> {
