@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api/files")
+@RequestMapping("/files")
 public class FileController {
 
     @Autowired
