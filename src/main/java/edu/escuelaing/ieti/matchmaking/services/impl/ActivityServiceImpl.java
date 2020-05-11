@@ -91,7 +91,7 @@ public class ActivityServiceImpl implements ActivityService {
         Query query = new Query();
         ArrayList<Activity> rta = new ArrayList<Activity>();
         query.addCriteria(Criteria.where("state").is(filter.getStateActiviti()));
-        query.addCriteria(Criteria.where("type").is(filter.getLabels().get(0)));
+        query.addCriteria(Criteria.where("type").regex(filter.getLabels().get(0)));
         query.skip(4 * filter.getPag()).limit(4);
         for (Activity act : mongoOperation.find(query, Activity.class)) {
             if (!act.getOwner().equals(userId)) {

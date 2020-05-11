@@ -182,7 +182,7 @@ public class UserServiceImpl implements UserService {
 		List<Activity> rta = new ArrayList<>();
 		activities.forEach(activiti -> {
 			if (activiti.getState().equals(filter.getStateActiviti())
-					&& activiti.getType().equals(filter.getLabels().get(0))) {
+					&& activiti.getType().contains(filter.getLabels().get(0))) {
 				rta.add(activiti);
 			}
 		});
