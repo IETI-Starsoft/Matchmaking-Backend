@@ -84,8 +84,9 @@ public class ActivityController {
 		}
 	}
 
-	@PostMapping("/filters/activiti")
+	@PostMapping("/filters/activity")
 	public ResponseEntity<?> getAvailableActivitiesByTypeActiviti(@RequestBody Filter filter) {
+		System.out.println(filter);
 		List<Activity> activities = null;
 		try {
 			activities = activityService.getAvailableActivitiesByTypeActiviti(filter.getUserConsulting(), filter);
