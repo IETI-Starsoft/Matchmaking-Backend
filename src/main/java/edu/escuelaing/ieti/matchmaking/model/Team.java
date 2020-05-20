@@ -22,6 +22,33 @@ public class Team {
 
 	private String name; 
 	
+	private Integer nRating; 
+	
+	private Double rating;
+	
+	public void setCalculateRating(Integer score) {
+		Integer n=nRating;
+		Double nScore=((rating*n)+score)/(n+1);
+		setnRating(n+1);
+		setRating(nScore);
+	}
+
+	public Integer getnRating() {
+		return nRating;
+	}
+
+	public void setnRating(Integer nRating) {
+		this.nRating = nRating;
+	}
+
+	public Double getRating() {
+		return rating;
+	}
+
+	public void setRating(Double rating) {
+		this.rating = rating;
+	}
+
 	public ArrayList<String> getMembers() {
 		return members;
 	}

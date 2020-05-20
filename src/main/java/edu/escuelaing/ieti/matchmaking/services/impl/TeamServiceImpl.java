@@ -197,4 +197,10 @@ public class TeamServiceImpl implements TeamService {
 		}
 		return rta;
 	}
+	@Override
+	public void setRanking(String teamId, Integer score) throws EntityNotFoundException {
+		Team team= getTeamById(teamId);
+		team.setCalculateRating(score);
+		update(team);
+	}
 }

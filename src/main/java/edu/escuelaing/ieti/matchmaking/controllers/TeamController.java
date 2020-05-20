@@ -75,4 +75,13 @@ public class TeamController {
 			List<Activity> activities=teamService.getAllActivitiesByNoneFilter(filter);
 			return new ResponseEntity<>(activities,HttpStatus.OK);
 		}
+		@PutMapping("/id/{teamId}/ranking/{score}")
+		public ResponseEntity<?> setRankingUser(@PathVariable String teamId,@PathVariable Integer score ){
+			try {
+				teamService.setRanking(teamId, score);
+			} catch (EntityNotFoundException e) {
+				return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+			}
+			return new ResponseEntity<>(HttpStatus.OK);
+		} 
 }

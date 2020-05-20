@@ -21,7 +21,7 @@ public class User {
 
     private String imageFileURL;
 
-    private Integer rating;
+    private double rating;
 
     private Integer credits;
 
@@ -30,8 +30,29 @@ public class User {
     private List<String> teams;
 
     private List<String> activities;
+    
+    private Integer nRating; 
 
-    public String getFirstName() {
+
+    public void setCalculateRating(Integer score) {
+		Integer n=nRating;
+		Double nScore=((rating*n)+score)/(n+1);
+		setnRating(n+1);
+		setRating(nScore);
+	}
+
+
+	public Integer getnRating() {
+		return nRating;
+	}
+
+
+	public void setnRating(Integer nRating) {
+		this.nRating = nRating;
+	}
+
+
+	public String getFirstName() {
         return firstName;
     }
 
@@ -63,11 +84,11 @@ public class User {
         this.password = password;
     }
 
-    public Integer getRating() {
+    public double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
 

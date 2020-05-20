@@ -42,4 +42,6 @@ public interface UserService {
 	List<Activity> getAllActivitiesByRangeCredits(Filter filter);
 
 	List<Activity> getAllActivitiesByNoneFilter(Filter filter);
+	
+	void setRanking(String userId, Integer score) throws EntityNotFoundException ;
 }
