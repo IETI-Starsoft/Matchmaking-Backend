@@ -23,7 +23,7 @@ public class User {
 
     private String imageFileURL;
 
-    private Integer rating;
+    private Double rating;
 
     private Integer credits;
 
@@ -48,6 +48,7 @@ public class User {
 		Double nScore=((ranking.get(1)*n)+score)/(n+1);
 		ranking.set(0, n+1);
 		ranking.set(1, nScore);
+		setRating(nScore);
 	}
 
 	public String getFirstName() {
@@ -82,11 +83,11 @@ public class User {
         this.password = password;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 
