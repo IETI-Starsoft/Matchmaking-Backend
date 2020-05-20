@@ -1,7 +1,6 @@
 package edu.escuelaing.ieti.matchmaking.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -23,23 +22,6 @@ public class Team {
 
 	private String name; 
 	
-	private List<Double> ranking=Arrays.asList(0.0,0.0);
-	
-	public List<Double> getRanking() {
-		return ranking;
-	}
-
-	public void setRanking(List<Double> ranking) {
-		this.ranking = ranking;
-	}
-	
-	public void setRanking(Double score) {
-		Double n=ranking.get(0);
-		Double nScore=((ranking.get(1)*n)+score)/(n+1);
-		ranking.set(0, n+1);
-		ranking.set(1, nScore);
-	}
-
 	public ArrayList<String> getMembers() {
 		return members;
 	}

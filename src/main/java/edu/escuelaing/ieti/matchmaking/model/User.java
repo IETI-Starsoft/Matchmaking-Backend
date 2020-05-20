@@ -3,8 +3,6 @@ package edu.escuelaing.ieti.matchmaking.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.List;
 
 @Document
@@ -23,7 +21,7 @@ public class User {
 
     private String imageFileURL;
 
-    private Double rating;
+    private Integer rating;
 
     private Integer credits;
 
@@ -32,26 +30,8 @@ public class User {
     private List<String> teams;
 
     private List<String> activities;
-    
-    private List<Double> ranking; 
 
-    public List<Double> getRanking() {
-		return ranking;
-	}
-
-	public void setRanking(List<Double> ranking) {
-		this.ranking = ranking;
-	}
-	
-	public void setRanking(Double score) {
-		Double n=ranking.get(0);
-		Double nScore=((ranking.get(1)*n)+score)/(n+1);
-		ranking.set(0, n+1);
-		ranking.set(1, nScore);
-		setRating(nScore);
-	}
-
-	public String getFirstName() {
+    public String getFirstName() {
         return firstName;
     }
 
@@ -83,11 +63,11 @@ public class User {
         this.password = password;
     }
 
-    public Double getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(Double rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
