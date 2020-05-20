@@ -75,8 +75,8 @@ public class TeamController {
 			List<Activity> activities=teamService.getAllActivitiesByNoneFilter(filter);
 			return new ResponseEntity<>(activities,HttpStatus.OK);
 		}
-		@PostMapping("/id/{teamId}/ranking/{score}")
-		public ResponseEntity<?> setRankingUser(@PathVariable String teamId,@PathVariable Double score ){
+		@PutMapping("/id/{teamId}/ranking/{score}")
+		public ResponseEntity<?> setRankingUser(@PathVariable String teamId,@PathVariable Integer score ){
 			try {
 				teamService.setRanking(teamId, score);
 			} catch (EntityNotFoundException e) {

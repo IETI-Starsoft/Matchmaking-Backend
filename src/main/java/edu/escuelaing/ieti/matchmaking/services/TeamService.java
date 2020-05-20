@@ -37,5 +37,5 @@ public interface TeamService {
 	
 	List<Activity> activitiesPagination(List<Activity> activities,Integer pag);
 	
-	void setRanking(String teamId, Double score) throws EntityNotFoundException ;
+	void setRanking(String teamId, Integer score) throws EntityNotFoundException ;
 }

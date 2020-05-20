@@ -43,5 +43,5 @@ public interface UserService {
 
 	List<Activity> getAllActivitiesByNoneFilter(Filter filter);
 	
-	void setRanking(String userId, Double score) throws EntityNotFoundException ;
+	void setRanking(String userId, Integer score) throws EntityNotFoundException ;
 }

@@ -225,8 +225,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void setRanking(String userId, Double score) throws EntityNotFoundException {
+	public void setRanking(String userId, Integer score) throws EntityNotFoundException {
 		User user= getUserById(userId);
-		user.setRanking(score);
+		user.setCalculateRating(score);
+		update(user);
 	}
 }
