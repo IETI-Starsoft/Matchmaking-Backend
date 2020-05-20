@@ -223,4 +223,10 @@ public class UserServiceImpl implements UserService {
 		else
 			return rta;
 	}
+
+	@Override
+	public void setRanking(String userId, Double score) throws EntityNotFoundException {
+		User user= getUserById(userId);
+		user.setRanking(score);
+	}
 }
