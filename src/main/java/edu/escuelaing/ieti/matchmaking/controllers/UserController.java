@@ -95,13 +95,5 @@ public class UserController {
 		List<Activity> activities=userService.getAllActivitiesByNoneFilter(filter);
 		return new ResponseEntity<>(activities,HttpStatus.OK);
 	}
-	@PostMapping("/id/{userId}/ranking/{score}")
-	public ResponseEntity<?> setRankingUser(@PathVariable String userId,@PathVariable Double score ){
-		try {
-			userService.setRanking(userId, score);
-		} catch (EntityNotFoundException e) {
-			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		}
-		return new ResponseEntity<>(HttpStatus.OK);
-	} 
+
 }
